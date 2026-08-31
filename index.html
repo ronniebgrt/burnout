@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#121110">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Burnout Ultra">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAASeUlEQVR4nO3deZRW5X3AcQdnUIYAw6YmGlvZRdD21D1a0agY0NhYNU3bpGnSJqZNPUbiblzikmittT05ajWtS5O4L/WoiYIbgqhoPRoFRMUqyyiLIijIMMP0D88hRIbh3nfe973L7/P51+e+78N9PM/33vvOvNMwaGDLNgDE0yvrCQCQDQEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgGrOeANTDjDG7pD3koHmLajETyI+GQQNbsp4DVFMFe31yqkCZCABlUNNNf0vEgKITAIoqk01/S8SAIhIACiZX+/7mlIACEQCKIef7/uaUgPwTAPKucFv/pmSAPBMAcqrQ+/7mlIAcEgByp2Rb/6ZkgFwRAHKkxFv/pmSAnPBVEORFkN1/m0j/UnLOHQDZC7shuhUgWwJAlsJu/ZuSAbLiERCZsft/wnkgK+4AyIAtr0tuBagzdwDUm91/S5wZ6kwAqCt7XPecH+rJIyDqxNaWisdB1IE7AOrB7p+WM0YdCAA1Zy+rjPNGrQkAtWUX6wlnj5oSAGrI/tVzziG140NgasK2VXU+Fqbq3AFQfXb/WnBWqToBoMrsU7Xj3FJdAkA12aFqzRmmigQAICgBoGpcnNaH80y1CADVYVeqJ2ebqhAAqsB+VH/OOT0nAPSUnSgrzjw9JAD0iD0oW84/PSEAAEEJAJVz+ZkHVoGKCQAVsu/kh7WgMgJAJew4eWNFqIAAAAQlAKTmYjOfrAtpCQDp2GXyzOqQigAABCUApOACM/+sEckJAEBQAkBSLi2LwkqRkACQiD2lWKwXSQgAQFACwNa5nCwiq8ZWCQBAUALAVriQLC5rR/cEACAoAQAISgDojmcIRWcF6YYAAAQlAGyRi8dysI5siQAABCUAAEEJAF3z3KBMrCZdEgCAoAQAICgBoAueGJSPNWVzAgAQlAAABCUAAEEJAJ/mYXFZWVk+RQAAghIAgKAEACAoAeD3eExcbtaXTQkAQFACABCUAAAEJQAAQQkAQFACABCUAPA7fkYwAqvMRgIAEJQAAAQlAABBCQBAUAIAEJQAAAQlAABBCQBAUAIAEJQAAAQlAABBCQBAUAIAEJQAAAQlAABBCQBAUALA7xw0b1HWU6DmrDIbCQBAUAIAEJQAAAQlAABBCQBAUAIAEJQA8Hv8jGC5WV82JQAAQQkAQFACABCUAPBpHhOXlZXlUwQAICgBAAhKAACCEgC64GFx+VhTNicAAEEJAEBQAkDXPDEoE6tJlwQAICgBAAhKANgizw3KwTqyJQIAEJQA0B0Xj0VnBemGAAAEJQAAQQkAW+EZQnFZO7onAABBCQBb50KyiKwaWyUAAEEJAIm4nCwW60USAkBS9pSisFIkJAAAQQkAKbi0zD9rRHICABCUAJCOC8w8szqkIgCkZpfJJ+tCWgIAEJQAUAkXm3ljRaiAAFAhO05+WAsqIwBUzr6TB1aBigkAQFACQI+4/MyW809PCAA9ZQ/KijNPDwkAVWAnqj/nnJ4TAKrDflRPzjZVIQBUjV2pPpxnqkUAAIISAKrJxWmtOcNUkQBQZXao2nFuqS4BoPrsU7XgrFJ1DYMGtmQ9B0prxphdsp5CGdj6qRF3ANSQnavnnENqRwCoLftXTzh71JQAUHN2sco4b9SaAFAP9rK0nDHqwIfA1JWPhbfK1k/duAOgruxu3XN+qCcBoN7scVvizFBnHgGRGY+DNrL1kwl3AGTGrvcJ54GsuAMge2FvBWz9ZEsAyItQGbD1kwceAZEXcfbEOP9Scs4dALlT4lsBWz+5IgDkVMkyYOsnhwSAvCt0Cez75JkAUAyFy4Ctn/wTAAom5yWw71MgAkBR5aoE9n2KSAAog0xiYNOn6ASAsqlpDGz6lIkAEEIFVbDXU3oCABCUr4IACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgBAAgKAEACEoAAIISAICgGrOeACV07tmn/803/qqHL9LZ2dne3t7e3r5u3bpVq1avWr16+fIV77zz7pIlra+9/sb8115/++2FVZntplLN/IEHHzrl1NMrfq8ZT0zdcccdEg7+wZQz7n/gNxW/F3RJAMiphoaGpqampqamPn36tLS0bD7gvffen/3c848/8eTUqY9+sGpV3ScIhecREEU1aNDAiUce/pNLLnz6qcf+9V9+usfY3bOeERSMAFB4jY2NR0/+0j133XLF5ZcOGjQw6+lAYQgAJdHQ0HDslyffd8/te+45Luu5QDEIAKWy44473HzDdX+0155ZTwQKQAAom759+15z9VVDBg/OeiKQdwJACQ0ZPPj8887KehaQdwJAOR018Yg9x++R9Swg1wSA0vraX5yY9RQg1/wiGBnr5vdpm5qaBvTvP3Lk8C8ceMAJx38l7Y94HnnEF8/50YUbNmyoxjShhNwBkF/r169fvmLFrKefveLKfzt84tG/eWhqqsP79++3+5jRNZoblIAAUAyrV394yqlnzHr62VRHjR49qkbzgRIQAAqjo6PjkksvT3XIrp/fpUaTgRIQAIrk1fmvvfl/byUf369/v9pNBopOACiY+fNfSz64z/bb124mUHQCQMGsXv1h8sFr166t3Uyg6ASAgunX7zPJB6/84IPazQSKTgAomJEjhicf/MYbC2o3Eyg6AaBIRowYNmzYbsnHv/jSy7WbDBSdAFAYvXr1OvvM05KP/+3LryxevKR284GiEwCKobm5+Z8vu/jggw5Mfsitt91Zu/lACfguIPKrsbFxwID+I4YPO/CA/U444bihQ4YkP/aNNxbcdfe9NZsalIEAkLHJkyZOnjSxuq+5bt26Kaed3dHha+CgOx4BUTbr16//4ennvDJnbtYTgbxzB0CprFjx3qk/PPOpWc9kPREoAAGgJNrb2+++577Lr7jqA7/8BckIAGXQ3t5+0SWX3Xb7XR0dHVnPBQrDZwCUQWNj44XnnzNz+rSTvvPt3r17Zz0dKAYBoDwGDx405dSTH/71/+y7z95Z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">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%20%22Burnout%20Ultra%20Tracker%22%2C%20%22short_name%22%3A%20%22Burnout%20Ultra%22%2C%20%22start_url%22%3A%20%22.%22%2C%20%22display%22%3A%20%22standalone%22%2C%20%22background_color%22%3A%20%22%23121110%22%2C%20%22theme_color%22%3A%20%22%23121110%22%7D">
+<title>Burnout Ultra – Live Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root{
+    --bg: #121110;
+    --surface: #1a1917;
+    --surface-2: #221f1d;
+    --line: #322e2b;
+    --text: #ede9e1;
+    --muted: #7a756e;
+    --trail: #d6392c;
+    --trail-dim: #b32e23;
+    --amber: #d6392c;
+    --brick: #8f4a3d;
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap{ max-width: 480px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  .masthead{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom: 22px; }
+  .masthead h1{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700; font-size: 30px; letter-spacing: 1px; margin:0;
+    text-transform: uppercase;
+  }
+  .masthead .dot{ width:8px; height:8px; border-radius:50%; background: var(--trail); display:inline-block; margin-right:8px; box-shadow:0 0 0 3px rgba(214,57,44,0.18); }
+  .live-tag{ font-size:12px; color:var(--muted); }
+  .event-info{ font-size:12px; color:var(--muted); margin: -14px 0 20px 2px; }
+  .stat-strip{
+    display:flex; border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    margin-bottom: 20px; background: var(--surface);
+  }
+  .stat-strip .stat{ flex:1; padding: 20px 8px 18px; text-align:center; border-right:1px solid var(--line); }
+  .stat-strip .stat:last-child{ border-right:none; }
+  .stat-strip .stat .k{
+    font-family:'JetBrains Mono', monospace; font-size:10px; color: var(--muted);
+    text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;
+  }
+  .stat-strip .stat .v{ font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:20px; color: var(--text); }
+  .mono-label{
+    font-family:'JetBrains Mono', monospace; font-size:10px; color: var(--muted);
+    text-transform:uppercase; letter-spacing:1.3px;
+  }
+  .livestream-link{
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    text-align:center; font-size:11px; font-weight:600; color: var(--text); text-decoration:none;
+    text-transform:uppercase; letter-spacing:1.2px;
+    border:1px solid var(--line); border-radius:8px; padding:10px; margin-bottom:18px;
+  }
+  .livestream-link .live-dot{ width:7px; height:7px; border-radius:50%; background: var(--trail); display:inline-block; }
+
+  /* Registration */
+  .card{ background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+  .card p.lead{ color: var(--muted); font-size: 14px; line-height:1.5; margin: 0 0 16px; }
+  input[type=text]{
+    width:100%; background: var(--surface-2); border:1px solid var(--line); color: var(--text);
+    padding: 12px 14px; border-radius: 8px; font-size: 16px; font-family: 'Inter', sans-serif;
+  }
+  input[type=text]:focus{ outline: none; border-color: var(--trail); }
+  button{ font-family:'Inter', sans-serif; cursor:pointer; border:none; }
+  .btn-primary{
+    width:100%; margin-top: 12px; background: var(--trail); color: #10140f; font-weight:600;
+    font-size: 15px; padding: 13px; border-radius: 8px; transition: background .15s;
+  }
+  .btn-primary:active{ background: var(--trail-dim); }
+  .btn-primary:disabled{ background: var(--surface-2); color: var(--muted); }
+  .error-msg{ color: var(--brick); font-size: 13px; margin: 10px 0 0; min-height: 0; }
+  .error-msg:empty{ margin: 0; }
+
+  /* Hero timer */
+  .hero{ text-align:center; padding: 26px 10px 22px; position:relative; }
+  .hero .lap-label{ font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform:uppercase; letter-spacing: 1.5px; }
+  .hero .timer{
+    font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size: 80px; line-height:0.95;
+    letter-spacing: 0.5px; font-variant-numeric: tabular-nums; color: var(--text);
+  }
+  .hero .timer.urgent{ color: var(--amber); }
+  .hero .sub{ font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .flash-overlay{
+    position:fixed; inset:0; background: var(--trail); opacity:0; pointer-events:none;
+    z-index: 50; transition: opacity .18s ease;
+  }
+  .flash-overlay.on{ opacity: 0.85; }
+  .flash-msg{
+    position:fixed; top:46%; left:50%; transform:translate(-50%,-50%);
+    font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size: 40px;
+    color: #10140f; z-index:51; opacity:0; pointer-events:none; transition: opacity .18s ease;
+  }
+  .flash-msg.on{ opacity: 1; }
+
+  /* Controls */
+  .controls{ display:flex; gap:10px; margin: 4px 0 20px; }
+  .btn-toggle{
+    flex:1; background: var(--surface); border:1px solid var(--line); color: var(--text);
+    font-size: 14px; font-weight:500; padding: 12px 8px; border-radius: 8px; text-align:center;
+  }
+  .btn-toggle.active{ background: rgba(214,57,44,0.14); border-color: var(--trail); color: var(--trail); }
+  .btn-toggle.danger.active{ background: rgba(193,89,74,0.14); border-color: var(--brick); color: var(--brick); }
+  .btn-toggle .k{ display:block; font-size:11px; color:var(--muted); margin-top:2px; }
+
+  /* Map */
+  #map{ height: 320px; border-radius: 10px; border:1px solid var(--line); margin-bottom: 18px; background: #000; }
+  .leaflet-popup-content-wrapper{ background: var(--surface); color: var(--text); border-radius:8px; }
+  .leaflet-popup-tip{ background: var(--surface); }
+  .runner-pin{
+    width:14px; height:14px; border-radius:50%; border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+  }
+
+  /* Runner list */
+  .section-label{ font-size: 11px; font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:1.3px; color: var(--muted); margin: 0 0 10px 2px; display:flex; justify-content:space-between; }
+  .table-head{
+    font-family:'JetBrains Mono', monospace; font-size:10px; color: var(--muted);
+    text-transform:uppercase; letter-spacing:1.3px; display:flex; padding: 0 14px 8px;
+  }
+  .table-head span:first-child{ flex:1; }
+  .table-head span:nth-child(2){ width:60px; text-align:right; }
+  .table-head span:nth-child(3){ width:56px; text-align:right; }
+  .runner{
+    display:flex; align-items:center; gap:8px; padding: 13px 4px;
+    border-bottom: 1px solid var(--line);
+  }
+  .runner:last-child{ border-bottom:none; }
+  .runner .info{ flex:1; min-width:0; }
+  .runner .name{ font-size: 14px; font-weight:500; }
+  .runner .km{ font-size: 11px; color: var(--muted); margin-top:1px; }
+  .runner .status{
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    width:60px; text-align:right; color: var(--muted); flex-shrink:0;
+  }
+  .runner .status.is-active{ color: var(--trail); }
+  .runner .round{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color: var(--muted);
+    width:56px; text-align:right; flex-shrink:0;
+  }
+  .empty-state{ color: var(--muted); font-size: 13px; padding: 14px 4px; }
+
+  .app-hidden{ display:none; }
+  .admin-row{ display:flex; flex-direction:column; gap:6px; padding: 12px 4px; border-bottom: 1px solid var(--line); }
+  .admin-row:last-child{ border-bottom:none; }
+  .admin-row-top{ display:flex; align-items:center; gap:8px; }
+  .admin-row input[type=text], .admin-row input[type=email]{ font-size:13px; padding:8px 10px; }
+  .admin-row-actions{ display:flex; gap:8px; align-items:center; }
+  .admin-icon-btn{ background:none; border:1px solid var(--line); border-radius:6px; padding:6px 8px; color:var(--text); font-size:12px; }
+  .admin-icon-btn.danger{ color:var(--brick); border-color:var(--brick); }
+  .admin-icon-btn.active{ color:var(--trail); border-color:var(--trail); }
+  .sim-btn{
+    background: var(--surface-2); border:1px solid var(--line); color: var(--text);
+    font-size: 12px; padding: 8px 12px; border-radius: 7px;
+  }
+  .sim-btn.current{ border-color: var(--trail); color: var(--trail); }
+  .diag-banner{
+    position:fixed; top:0; left:0; right:0; background: var(--brick); color:#fff;
+    font-size: 13px; padding: 10px 14px; z-index: 100; display:none; line-height:1.4;
+  }
+  .diag-banner.show{ display:block; }
+</style>
+</head>
+<body>
+
+<div class="diag-banner" id="diagBanner"></div>
+<div class="flash-overlay" id="flashOverlay"></div>
+<div class="flash-msg" id="flashMsg">NEUE RUNDE</div>
+
+<div class="wrap">
+  <div class="masthead">
+    <h1><span class="dot"></span>Burnout Ultra</h1>
+    <span style="display:flex; align-items:center; gap:10px;">
+      <span class="live-tag" id="runnerCountTag">–</span>
+      <button id="simGearBtn" aria-label="Zeit simulieren" style="background:none; border:none; color:var(--muted); font-size:16px; padding:4px; line-height:1;">🕐</button>
+      <button id="adminGearBtn" aria-label="Admin" style="background:none; border:none; color:var(--muted); font-size:16px; padding:4px; line-height:1;">⚙</button>
+    </span>
+  </div>
+  <div class="event-info" id="eventInfo">Sa 5. Sept · Start 16:00 · Biel/Bienne</div>
+
+  <!-- Zeit-Simulation (Testen ohne Systemzeit zu ändern) -->
+  <div class="card app-hidden" id="simPanel" style="margin-bottom:16px;">
+    <p class="lead" style="margin-bottom:10px;">Zeitpunkt simulieren:</p>
+    <div id="simButtons" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="k">Loop</div><div class="v" id="statLoopValue">–</div></div>
+    <div class="stat"><div class="k">Distanz</div><div class="v" id="statDistValue">0.0 km</div></div>
+    <div class="stat"><div class="k">Zeit</div><div class="v" id="statTimeValue">–</div></div>
+    <div class="stat"><div class="k">Temp</div><div class="v" id="statTempValue">–°</div></div>
+  </div>
+  <a class="livestream-link" href="https://burnoutultra.com/stream/" target="_blank" rel="noopener"><span class="live-dot"></span>Livestream</a>
+
+  <!-- Admin PIN gate -->
+  <div class="card app-hidden" id="adminPinCard" style="margin-bottom:16px;">
+    <p class="lead" style="margin-bottom:10px;">Admin-PIN eingeben.</p>
+    <input type="password" id="adminPinInput" placeholder="PIN" inputmode="numeric" maxlength="12">
+    <button class="btn-primary" id="adminPinSubmit">Bestätigen</button>
+    <p class="error-msg" id="adminPinError"></p>
+  </div>
+
+  <!-- Admin panel -->
+  <div class="card app-hidden" id="adminPanel" style="margin-bottom:20px; padding: 14px 14px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+      <p style="font-weight:600; font-size:14px; margin:0;">Teilnehmer verwalten</p>
+      <button id="adminCloseBtn" style="background:none; border:none; color:var(--muted); font-size:13px; padding:4px;">Schliessen</button>
+    </div>
+    <div id="adminList"><div class="empty-state">Lädt …</div></div>
+  </div>
+
+  <!-- Registration -->
+  <div class="card" id="registerCard">
+    <p class="lead">Trag dich als Teilnehmer:in ein. Dein Name und Standort werden während des Rennens mit allen anderen geteilt.</p>
+    <input type="text" id="nameInput" placeholder="Anzeigename" maxlength="30">
+    <input type="email" id="emailInput" placeholder="E-Mail" maxlength="80" style="margin-top:10px;">
+    <button class="btn-primary" id="joinBtn">Registrieren</button>
+    <p class="error-msg" id="registerError"></p>
+  </div>
+
+  <!-- Main app -->
+  <div id="appView" class="app-hidden">
+
+    <div class="hero">
+      <div class="lap-label" id="lapLabel">Runde –</div>
+      <div class="timer" id="timerDisplay">--:--</div>
+      <div class="sub" id="timerSub">bis zur nächsten vollen Stunde</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-toggle" id="shareBtn">
+        Standort teilen
+        <span class="k" id="shareStatus">aus</span>
+      </button>
+      <button class="btn-toggle danger" id="dnfBtn">
+        Aufgeben
+        <span class="k" id="dnfStatus">noch dabei</span>
+      </button>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="section-label">
+      <span>Live — Teilnehmer:innen</span>
+      <span id="lastSync">–</span>
+    </div>
+    <div class="table-head">
+      <span>Athlet:in</span><span>Status</span><span>Runde</span>
+    </div>
+    <div class="card" style="padding: 6px 14px;">
+      <div id="runnerList"><div class="empty-state">Noch niemand sichtbar.</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- Sichtbare Fehlerdiagnose (läuft vor allem anderen) ----
+(function(){
+  const banner = document.getElementById('diagBanner');
+  function showDiag(msg){
+    banner.textContent = msg;
+    banner.classList.add('show');
+  }
+  window.addEventListener('error', function(e){
+    showDiag('Fehler: ' + (e.message || 'unbekannt') + (e.filename ? ' (' + e.filename.split('/').pop() + ':' + e.lineno + ')' : ''));
+  });
+  window.addEventListener('unhandledrejection', function(e){
+    showDiag('Fehler: ' + (e.reason && e.reason.message ? e.reason.message : String(e.reason)));
+  });
+})();
+</script>
+<script>
+(function(){
+  const registerCard = document.getElementById('registerCard');
+  const appView = document.getElementById('appView');
+  const nameInput = document.getElementById('nameInput');
+  const joinBtn = document.getElementById('joinBtn');
+  const shareBtn = document.getElementById('shareBtn');
+  const shareStatus = document.getElementById('shareStatus');
+  const dnfBtn = document.getElementById('dnfBtn');
+  const dnfStatus = document.getElementById('dnfStatus');
+  const timerDisplay = document.getElementById('timerDisplay');
+  const timerSub = document.getElementById('timerSub');
+  const lapLabel = document.getElementById('lapLabel');
+  const runnerList = document.getElementById('runnerList');
+  const runnerCountTag = document.getElementById('runnerCountTag');
+  const lastSync = document.getElementById('lastSync');
+  const flashOverlay = document.getElementById('flashOverlay');
+  const flashMsg = document.getElementById('flashMsg');
+
+  let me = null; // {id, name}
+  let sharing = false;
+  let dnf = false;
+  let watchId = null;
+  let map = null;
+  let markers = {};
+  let lastRemaining = null;
+
+  const FALLBACK_CENTER = [46.95, 7.45]; // Schweiz, neutraler Startpunkt
+
+  // Firebase Realtime Database (ersetzt window.storage, das ausserhalb von Claude nicht existiert)
+  const FIREBASE_URL = 'https://burnout-5c130-default-rtdb.europe-west1.firebasedatabase.app';
+  async function fbGet(path){
+    const res = await fetch(FIREBASE_URL + '/' + path + '.json');
+    if (!res.ok) throw new Error('Firebase GET fehlgeschlagen (' + res.status + ')');
+    return res.json();
+  }
+  async function fbSet(path, value){
+    const res = await fetch(FIREBASE_URL + '/' + path + '.json', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(value)
+    });
+    if (!res.ok) throw new Error('Firebase SET fehlgeschlagen (' + res.status + ')');
+    return res.json();
+  }
+  async function fbDelete(path){
+    const res = await fetch(FIREBASE_URL + '/' + path + '.json', { method: 'DELETE' });
+    if (!res.ok) throw new Error('Firebase DELETE fehlgeschlagen (' + res.status + ')');
+  }
+
+  // Offizielle Loop-Strecke (5.3 km), aus der Strava-GPX-Aufzeichnung
+  const LOOP_COORDS = [[47.13826, 7.253817], [47.138408, 7.253873], [47.138678, 7.253649], [47.13894, 7.253398], [47.139177, 7.253583], [47.13942, 7.253957], [47.13956, 7.254376], [47.139714, 7.254812], [47.139845, 7.255235], [47.140001, 7.255683], [47.140139, 7.256125], [47.140302, 7.25651], [47.140607, 7.256511], [47.140945, 7.256552], [47.141259, 7.256634], [47.141498, 7.256858], [47.141726, 7.256654], [47.141911, 7.257004], [47.1421, 7.257398], [47.142249, 7.257847], [47.142343, 7.258275], [47.142395, 7.258772], [47.142447, 7.25926], [47.142455, 7.259752], [47.142467, 7.260179], [47.142633, 7.260631], [47.142882, 7.260973], [47.143177, 7.261175], [47.143461, 7.261299], [47.143683, 7.261617], [47.143852, 7.262032], [47.143959, 7.262505], [47.144038, 7.262926], [47.14415, 7.263393], [47.144306, 7.263822], [47.144504, 7.2642], [47.144643, 7.264577], [47.144733, 7.265023], [47.144818, 7.265496], [47.145086, 7.265752], [47.14539, 7.265828], [47.145643, 7.266144], [47.14595, 7.266358], [47.146095, 7.266768], [47.146195, 7.267182], [47.1463, 7.267647], [47.14642, 7.268086], [47.146644, 7.268459], [47.146885, 7.268705], [47.147082, 7.269073], [47.147379, 7.269251], [47.147395, 7.269691], [47.14759, 7.270049], [47.147832, 7.270339], [47.148072, 7.270628], [47.148368, 7.270913], [47.148674, 7.270915], [47.149004, 7.270909], [47.149349, 7.270938], [47.149677, 7.270966], [47.149985, 7.270998], [47.150321, 7.270928], [47.150644, 7.270784], [47.150905, 7.270513], [47.151146, 7.270267], [47.151422, 7.270007], [47.151678, 7.269724], [47.151876, 7.269943], [47.152024, 7.27029], [47.151752, 7.270547], [47.151492, 7.270835], [47.151179, 7.271036], [47.150917, 7.271203], [47.150605, 7.271343], [47.150274, 7.271438], [47.149936, 7.27155], [47.149632, 7.271671], [47.149393, 7.271607], [47.14912, 7.271419], [47.148795, 7.271522], [47.148515, 7.271606], [47.148361, 7.271356], [47.148351, 7.271014], [47.148113, 7.270661], [47.147884, 7.270356], [47.147619, 7.270042], [47.147407, 7.269683], [47.147371, 7.269177], [47.147078, 7.26902], [47.146863, 7.268631], [47.14658, 7.268338], [47.146379, 7.267926], [47.146284, 7.26749], [47.146167, 7.267024], [47.146066, 7.266565], [47.145822, 7.266239], [47.145567, 7.266003], [47.145284, 7.265754], [47.144933, 7.265674], [47.144776, 7.265262], [47.144708, 7.264805], [47.14457, 7.264336], [47.144379, 7.26392], [47.144204, 7.263491], [47.144093, 7.263055], [47.144002, 7.262583], [47.143896, 7.262096], [47.143741, 7.261652], [47.143536, 7.261295], [47.143208, 7.261136], [47.142892, 7.260929], [47.142602, 7.260639], [47.142462, 7.260218], [47.142454, 7.259707], [47.142439, 7.259195], [47.142393, 7.258702], [47.14235, 7.258251], [47.142262, 7.257778], [47.142101, 7.257329], [47.141915, 7.256907], [47.141732, 7.256621], [47.141463, 7.256837], [47.141216, 7.256597], [47.140886, 7.256514], [47.140571, 7.256447], [47.140266, 7.256437], [47.140107, 7.256044], [47.139973, 7.255613], [47.13984, 7.255203], [47.139696, 7.254761], [47.139559, 7.254357], [47.139372, 7.253927], [47.139175, 7.253588], [47.138892, 7.253335], [47.138595, 7.253194], [47.138254, 7.253083], [47.137965, 7.25298], [47.137658, 7.25289], [47.137334, 7.252767], [47.13703, 7.252734], [47.137179, 7.253122], [47.137369, 7.25353], [47.137564, 7.253956], [47.137753, 7.25436], [47.137954, 7.254341], [47.138245, 7.254206], [47.138205, 7.253849]];
+
+  // Fixer Renn-Start: Samstag 5. September 2026, 16:00 Uhr, Dauer 24h
+  const RACE_START = new Date(2026, 8, 5, 16, 0, 0);
+  const RACE_HOURS = 24;
+  const RACE_END = new Date(RACE_START.getTime() + RACE_HOURS * 3600000);
+  const LOOP_KM = 5.3;
+
+  // Debug/Test: ?simHours=10 in der URL simuliert "10h nach Rennstart",
+  // ohne die Systemzeit ändern zu müssen. Läuft ab da normal weiter.
+  const urlParams = new URLSearchParams(location.search);
+  const simHoursParam = urlParams.get('simHours');
+  const SIM_OFFSET_MS = (simHoursParam !== null && !isNaN(parseFloat(simHoursParam)))
+    ? (RACE_START.getTime() + parseFloat(simHoursParam) * 3600000) - Date.now()
+    : 0;
+  function nowMs(){ return Date.now() + SIM_OFFSET_MS; }
+  function nowSim(){ return new Date(nowMs()); }
+
+  function pad(n){ return n.toString().padStart(2,'0'); }
+
+  function nextHourBoundary(now){
+    const b = new Date(now);
+    b.setMinutes(0,0,0);
+    b.setHours(b.getHours()+1);
+    return b;
+  }
+
+  function fmtDur(ms){
+    const s = Math.max(0, Math.floor(ms/1000));
+    const h = Math.floor(s/3600);
+    const m = Math.floor((s%3600)/60);
+    const sec = s%60;
+    return (h>0 ? pad(h)+':' : '') + pad(m) + ':' + pad(sec);
+  }
+
+  function fmtDurWithDays(ms){
+    const s = Math.max(0, Math.floor(ms/1000));
+    const d = Math.floor(s/86400);
+    const h = Math.floor((s%86400)/3600);
+    const m = Math.floor((s%3600)/60);
+    const sec = s%60;
+    return (d>0 ? d+'D ' : '') + pad(h) + ':' + pad(m) + ':' + pad(sec);
+  }
+
+  function tickTimer(){
+    const now = nowSim();
+
+    // Vor dem Start: Countdown bis 16:00
+    if (now < RACE_START){
+      timerDisplay.textContent = fmtDur(RACE_START - now);
+      timerDisplay.classList.remove('urgent');
+      lapLabel.textContent = 'Start in';
+      timerSub.textContent = 'Sa 5. Sept, 16:00 Uhr';
+      document.getElementById('statLoopValue').textContent = '–';
+      document.getElementById('statTimeValue').textContent = fmtDurWithDays(RACE_START - now);
+      document.getElementById('statDistValue').textContent = '0.0 km';
+      lastRemaining = null;
+      return;
+    }
+
+    // Nach 24h: Rennen vorbei
+    if (now >= RACE_END){
+      timerDisplay.textContent = '00:00';
+      timerDisplay.classList.remove('urgent');
+      lapLabel.textContent = 'Rennen beendet';
+      timerSub.textContent = '24 h erreicht';
+      document.getElementById('statLoopValue').textContent = RACE_HOURS + '/' + RACE_HOURS;
+      document.getElementById('statTimeValue').textContent = fmtDurWithDays(RACE_END - RACE_START);
+      document.getElementById('statDistValue').textContent = (RACE_HOURS * LOOP_KM).toFixed(1) + ' km';
+      lastRemaining = null;
+      return;
+    }
+
+    // Während des Rennens: Countdown zur nächsten vollen Stunde + Yard-Nummer
+    const boundary = nextHourBoundary(now);
+    const remainingMs = boundary - now;
+    const remainingSec = Math.max(0, Math.floor(remainingMs/1000));
+    const mm = Math.floor(remainingSec/60);
+    const ss = remainingSec%60;
+    timerDisplay.textContent = pad(mm) + ':' + pad(ss);
+    timerDisplay.classList.toggle('urgent', remainingSec <= 30);
+
+    const yardNumber = Math.floor((now - RACE_START) / 3600000) + 1;
+    const curHour = new Date(boundary); curHour.setHours(curHour.getHours()-1);
+    lapLabel.textContent = 'Yard ' + yardNumber + ' von ' + RACE_HOURS + ' · ' + pad(curHour.getHours()) + ':00–' + pad(boundary.getHours()) + ':00';
+    timerSub.textContent = 'bis zur nächsten vollen Stunde';
+    document.getElementById('statLoopValue').textContent = yardNumber + '/' + RACE_HOURS;
+    document.getElementById('statTimeValue').textContent = fmtDurWithDays(now - RACE_START);
+    document.getElementById('statDistValue').textContent = (yardNumber * LOOP_KM).toFixed(1) + ' km';
+
+    if (lastRemaining !== null && remainingSec > lastRemaining){
+      flashOverlay.classList.add('on');
+      flashMsg.classList.add('on');
+      flashMsg.textContent = 'YARD ' + yardNumber;
+      setTimeout(()=>{ flashOverlay.classList.remove('on'); flashMsg.classList.remove('on'); }, 900);
+
+      if (me && !dnf){
+        me.loops = (me.loops || 0) + 1;
+        upsertRunner();
+      }
+    }
+    lastRemaining = remainingSec;
+  }
+
+  // ---------- Registration ----------
+  function loadMe(){
+    try{
+      const raw = localStorage.getItem('burnoutUltraMe');
+      return raw ? JSON.parse(raw) : null;
+    }catch(e){ return null; }
+  }
+
+  function saveMe(m){
+    try{
+      localStorage.setItem('burnoutUltraMe', JSON.stringify(m));
+    }catch(e){
+      console.warn('Lokale Kennung konnte nicht gespeichert werden', e);
+    }
+  }
+
+  async function upsertRunner(){
+    if (!me) return;
+    const payload = {
+      id: me.id,
+      name: me.name,
+      email: me.email || '',
+      status: dnf ? 'dnf' : 'active',
+      loops: me.loops || 0,
+      lat: me.lat || null,
+      lng: me.lng || null,
+      updatedAt: nowMs()
+    };
+    await fbSet('runners/' + me.id, payload);
+  }
+
+  function isValidEmail(v){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  joinBtn.addEventListener('click', async ()=>{
+    const errEl = document.getElementById('registerError');
+    errEl.textContent = '';
+    const name = nameInput.value.trim();
+    const email = document.getElementById('emailInput').value.trim();
+    if (!name){ nameInput.focus(); return; }
+    if (!email || !isValidEmail(email)){
+      errEl.textContent = 'Bitte eine gültige E-Mail-Adresse eingeben.';
+      document.getElementById('emailInput').focus();
+      return;
+    }
+
+    joinBtn.disabled = true;
+    joinBtn.textContent = 'Registriere …';
+    try{
+      me = { id: crypto.randomUUID(), name: name, email: email };
+      saveMe(me);
+      await upsertRunner();
+      enterApp();
+    }catch(e){
+      console.error('Registrierung fehlgeschlagen', e);
+      errEl.textContent = 'Registrierung fehlgeschlagen: ' + (e && e.message ? e.message : 'unbekannter Fehler') + '. Bitte nochmal versuchen.';
+      me = null;
+      joinBtn.disabled = false;
+      joinBtn.textContent = 'Registrieren';
+    }
+  });
+
+  function enterApp(){
+    registerCard.classList.add('app-hidden');
+    appView.classList.remove('app-hidden');
+    initMap();
+    refreshRunners();
+  }
+
+  // ---------- Location sharing ----------
+  function toggleShare(){
+    sharing = !sharing;
+    shareStatus.textContent = sharing ? 'an' : 'aus';
+    shareBtn.classList.toggle('active', sharing);
+    if (sharing){
+      startWatching();
+    } else {
+      stopWatching();
+    }
+  }
+  shareBtn.addEventListener('click', toggleShare);
+
+  function startWatching(){
+    if (!navigator.geolocation){
+      alert('Standort wird von diesem Browser nicht unterstützt.');
+      sharing = false; shareStatus.textContent = 'aus'; shareBtn.classList.remove('active');
+      return;
+    }
+    watchId = navigator.geolocation.watchPosition(
+      (pos)=>{
+        me.lat = pos.coords.latitude;
+        me.lng = pos.coords.longitude;
+        upsertRunner();
+      },
+      (err)=>{
+        console.error(err);
+        shareStatus.textContent = 'Fehler';
+      },
+      { enableHighAccuracy: true, maximumAge: 10000, timeout: 15000 }
+    );
+    requestWakeLock();
+  }
+
+  function stopWatching(){
+    if (watchId !== null && navigator.geolocation){
+      navigator.geolocation.clearWatch(watchId);
+      watchId = null;
+    }
+    releaseWakeLock();
+  }
+
+  // Bildschirm wach halten, solange Standort geteilt wird (falls vom Browser unterstützt)
+  let wakeLock = null;
+  async function requestWakeLock(){
+    if (!sharing || !('wakeLock' in navigator)) return;
+    try{
+      wakeLock = await navigator.wakeLock.request('screen');
+      wakeLock.addEventListener('release', ()=>{ wakeLock = null; });
+    }catch(e){ console.warn('Wake Lock nicht verfügbar', e); }
+  }
+  function releaseWakeLock(){
+    if (wakeLock){ wakeLock.release().catch(()=>{}); wakeLock = null; }
+  }
+
+  // Sofort Standort + Läuferliste nachholen, sobald die Seite wieder sichtbar wird
+  document.addEventListener('visibilitychange', ()=>{
+    if (document.visibilityState === 'visible'){
+      if (sharing && navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(
+          (pos)=>{ me.lat = pos.coords.latitude; me.lng = pos.coords.longitude; upsertRunner(); },
+          (err)=>console.warn(err),
+          { enableHighAccuracy: true, maximumAge: 5000, timeout: 10000 }
+        );
+        requestWakeLock();
+      }
+      if (appView && !appView.classList.contains('app-hidden')) refreshRunners();
+    }
+  });
+
+  // ---------- DNF ----------
+  dnfBtn.addEventListener('click', ()=>{
+    dnf = !dnf;
+    dnfStatus.textContent = dnf ? 'ausgeschieden' : 'noch dabei';
+    dnfBtn.classList.toggle('active', dnf);
+    upsertRunner();
+  });
+
+  // ---------- Map ----------
+  function initMap(){
+    map = L.map('map', {
+      zoomControl: false, attributionControl: false,
+      dragging: false, scrollWheelZoom: false, doubleClickZoom: false,
+      touchZoom: false, boxZoom: false, keyboard: false, tap: false
+    }).setView(FALLBACK_CENTER, 13);
+
+    const loopLine = L.polyline(LOOP_COORDS, { color: getComputedStyle(document.documentElement).getPropertyValue('--trail').trim() || '#d6392c', weight: 4, opacity: 0.9 }).addTo(map);
+    const startIcon = L.divIcon({ className:'', html: '<div style="width:12px;height:12px;border-radius:3px;background:#fff;border:2px solid var(--trail);"></div>', iconSize:[12,12] });
+    L.marker(LOOP_COORDS[0], { icon: startIcon }).addTo(map).bindPopup('Start / Ziel');
+
+    const bounds = loopLine.getBounds();
+    map.fitBounds(bounds, { padding: [4,4] });
+    map.setMaxBounds(bounds.pad(0.25));
+  }
+
+  function colorFor(status){
+    return status === 'dnf' ? '#8f4a3d' : '#d6392c';
+  }
+
+  function updateMapMarkers(runners){
+    const seen = new Set();
+    runners.forEach(r=>{
+      if (r.lat == null || r.lng == null) return;
+      seen.add(r.id);
+      const html = '<div class="runner-pin" style="background:' + colorFor(r.status) + '"></div>';
+      if (markers[r.id]){
+        markers[r.id].setLatLng([r.lat, r.lng]);
+        markers[r.id].setIcon(L.divIcon({ className:'', html: html, iconSize:[14,14] }));
+        markers[r.id].setPopupContent(r.name);
+      } else {
+        const icon = L.divIcon({ className:'', html: html, iconSize:[14,14] });
+        markers[r.id] = L.marker([r.lat, r.lng], { icon: icon }).addTo(map).bindPopup(r.name);
+      }
+    });
+    Object.keys(markers).forEach(id=>{
+      if (!seen.has(id)){ map.removeLayer(markers[id]); delete markers[id]; }
+    });
+  }
+
+  // ---------- Runner list / sync ----------
+  function timeAgo(ts){
+    const s = Math.floor((nowMs()-ts)/1000);
+    if (s < 60) return 'vor ' + s + 's';
+    const m = Math.floor(s/60);
+    if (m < 60) return 'vor ' + m + ' min';
+    const h = Math.floor(m/60);
+    return 'vor ' + h + ' h';
+  }
+
+  function renderRunnerList(runners){
+    if (runners.length === 0){
+      runnerList.innerHTML = '<div class="empty-state">Noch niemand sichtbar.</div>';
+      return;
+    }
+    runners.sort((a,b)=> (a.status==='dnf') - (b.status==='dnf') || (b.loops||0) - (a.loops||0));
+    runnerList.innerHTML = runners.map(r=>{
+      const km = ((r.loops||0) * LOOP_KM).toFixed(1) + ' km';
+      const isOut = r.status === 'dnf';
+      return '<div class="runner">' +
+        '<div class="info">' +
+          '<div class="name">' + escapeHtml(r.name) + (r.id === me.id ? ' (Du)' : '') + '</div>' +
+          '<div class="km">' + km + '</div>' +
+        '</div>' +
+        '<div class="status' + (isOut ? '' : ' is-active') + '">' + (isOut ? 'Out' : 'In') + '</div>' +
+        '<div class="round">' + (r.loops||0) + '/' + RACE_HOURS + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  async function refreshRunners(){
+    try{
+      const data = await fbGet('runners');
+      const runners = data ? Object.keys(data).map(k=>data[k]) : [];
+      renderRunnerList(runners);
+      updateMapMarkers(runners);
+      runnerCountTag.textContent = runners.filter(r=>r.status!=='dnf').length + ' aktiv · ' + runners.length + ' gesamt';
+      lastSync.textContent = 'Updated ' + pad(nowSim().getHours()) + ':' + pad(nowSim().getMinutes());
+    }catch(e){
+      console.error('Sync fehlgeschlagen', e);
+    }
+  }
+
+  // ---------- Boot ----------
+  async function boot(){
+    tickTimer();
+    setInterval(tickTimer, 1000);
+
+    const existing = loadMe();
+    if (existing){
+      me = existing;
+      try{
+        const saved = await fbGet('runners/' + me.id);
+        if (saved){
+          me.loops = saved.loops || 0;
+          if (saved.status === 'dnf'){
+            dnf = true;
+            dnfStatus.textContent = 'ausgeschieden';
+            dnfBtn.classList.add('active');
+          }
+        }
+      }catch(e){ console.warn('Konnte bisherigen Fortschritt nicht laden', e); }
+      enterApp();
+    }
+
+    setInterval(()=>{ if (appView && !appView.classList.contains('app-hidden')) refreshRunners(); }, 5000);
+  }
+
+  boot();
+
+  // ---------- Temperatur Biel/Bienne (live, ohne API-Key) ----------
+  async function fetchTemp(){
+    const el = document.getElementById('statTempValue');
+    try{
+      const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=47.1368&longitude=7.2468&current=temperature_2m');
+      const data = await res.json();
+      const t = data && data.current && data.current.temperature_2m;
+      el.textContent = (typeof t === 'number') ? Math.round(t) + '°' : '–°';
+    }catch(e){
+      el.textContent = '–°';
+    }
+  }
+  fetchTemp();
+  setInterval(fetchTemp, 15 * 60 * 1000);
+
+  // ---------- Admin ----------
+  // PIN nur ein leichter Zugriffsschutz, kein echtes Login. Zum Ändern
+  // einfach den Wert unten anpassen.
+  const ADMIN_PIN = '2026';
+  let adminUnlocked = false;
+
+  const adminGearBtn = document.getElementById('adminGearBtn');
+  const adminPinCard = document.getElementById('adminPinCard');
+  const adminPinInput = document.getElementById('adminPinInput');
+  const adminPinSubmit = document.getElementById('adminPinSubmit');
+  const adminPinError = document.getElementById('adminPinError');
+  const adminPanel = document.getElementById('adminPanel');
+  const adminList = document.getElementById('adminList');
+  const adminCloseBtn = document.getElementById('adminCloseBtn');
+
+  adminGearBtn.addEventListener('click', ()=>{
+    if (adminUnlocked){
+      adminPanel.classList.toggle('app-hidden');
+      if (!adminPanel.classList.contains('app-hidden')) loadAdminList();
+      return;
+    }
+    adminPinCard.classList.toggle('app-hidden');
+    adminPinInput.value = '';
+    adminPinError.textContent = '';
+    if (!adminPinCard.classList.contains('app-hidden')) adminPinInput.focus();
+  });
+
+  adminPinSubmit.addEventListener('click', ()=>{
+    if (adminPinInput.value === ADMIN_PIN){
+      adminUnlocked = true;
+      adminPinCard.classList.add('app-hidden');
+      adminPanel.classList.remove('app-hidden');
+      loadAdminList();
+    } else {
+      adminPinError.textContent = 'Falscher PIN.';
+    }
+  });
+
+  adminCloseBtn.addEventListener('click', ()=>{
+    adminPanel.classList.add('app-hidden');
+  });
+
+  // ---------- Zeit-Simulation ----------
+  const simGearBtn = document.getElementById('simGearBtn');
+  const simPanel = document.getElementById('simPanel');
+  const simButtons = document.getElementById('simButtons');
+
+  const SIM_PRESETS = [
+    { label: 'Echte Zeit', hours: null },
+    { label: 'Start (0h)', hours: 0 },
+    { label: '+1h', hours: 1 },
+    { label: '+6h', hours: 6 },
+    { label: '+10h', hours: 10 },
+    { label: '+12h', hours: 12 },
+    { label: '+18h', hours: 18 },
+    { label: 'Kurz vor Ende', hours: 23.9 },
+    { label: 'Nach Ende', hours: 25 }
+  ];
+
+  SIM_PRESETS.forEach(p=>{
+    const btn = document.createElement('button');
+    btn.className = 'sim-btn';
+    btn.textContent = p.label;
+    if (p.hours === null && simHoursParam === null) btn.classList.add('current');
+    if (p.hours !== null && simHoursParam !== null && parseFloat(simHoursParam) === p.hours) btn.classList.add('current');
+    btn.addEventListener('click', ()=>{
+      const url = new URL(location.href);
+      if (p.hours === null){
+        url.searchParams.delete('simHours');
+      } else {
+        url.searchParams.set('simHours', p.hours);
+      }
+      location.href = url.toString();
+    });
+    simButtons.appendChild(btn);
+  });
+
+  simGearBtn.addEventListener('click', ()=>{
+    simPanel.classList.toggle('app-hidden');
+  });
+
+  async function loadAdminList(){
+    adminList.innerHTML = '<div class="empty-state">Lädt …</div>';
+    try{
+      const data = await fbGet('runners');
+      const runners = data ? Object.keys(data).map(k=>data[k]) : [];
+      if (runners.length === 0){
+        adminList.innerHTML = '<div class="empty-state">Noch keine Teilnehmer.</div>';
+        return;
+      }
+      runners.sort((a,b)=> a.name.localeCompare(b.name));
+      adminList.innerHTML = '';
+      runners.forEach(r=> adminList.appendChild(renderAdminRow(r)));
+    }catch(e){
+      adminList.innerHTML = '<div class="error-msg">Laden fehlgeschlagen: ' + (e.message || e) + '</div>';
+    }
+  }
+
+  function renderAdminRow(r){
+    const row = document.createElement('div');
+    row.className = 'admin-row';
+
+    const top = document.createElement('div');
+    top.className = 'admin-row-top';
+
+    const nameInputEl = document.createElement('input');
+    nameInputEl.type = 'text';
+    nameInputEl.value = r.name;
+    nameInputEl.style.flex = '1';
+
+    const dnfToggle = document.createElement('button');
+    dnfToggle.className = 'admin-icon-btn' + (r.status === 'dnf' ? ' danger active' : '');
+    dnfToggle.textContent = r.status === 'dnf' ? 'DNF' : 'Aktiv';
+
+    const kmLabel = document.createElement('span');
+    kmLabel.style.fontSize = '12px';
+    kmLabel.style.color = 'var(--muted)';
+    kmLabel.style.whiteSpace = 'nowrap';
+    kmLabel.textContent = (r.loops||0) + ' Loops · ' + ((r.loops||0) * LOOP_KM).toFixed(1) + ' km';
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'admin-icon-btn danger';
+    delBtn.textContent = 'Löschen';
+
+    top.appendChild(nameInputEl);
+    top.appendChild(kmLabel);
+    top.appendChild(dnfToggle);
+    top.appendChild(delBtn);
+
+    const emailInputEl = document.createElement('input');
+    emailInputEl.type = 'email';
+    emailInputEl.value = r.email || '';
+    emailInputEl.placeholder = 'E-Mail';
+
+    row.appendChild(top);
+    row.appendChild(emailInputEl);
+
+    async function persist(){
+      const updated = Object.assign({}, r, {
+        name: nameInputEl.value.trim() || r.name,
+        email: emailInputEl.value.trim(),
+        status: dnfToggle.classList.contains('active') ? 'dnf' : 'active',
+        updatedAt: nowMs()
+      });
+      try{
+        await fbSet('runners/' + r.id, updated);
+      }catch(e){ console.error('Update fehlgeschlagen', e); }
+    }
+
+    nameInputEl.addEventListener('change', persist);
+    emailInputEl.addEventListener('change', persist);
+    dnfToggle.addEventListener('click', ()=>{
+      dnfToggle.classList.toggle('active');
+      dnfToggle.classList.toggle('danger');
+      dnfToggle.textContent = dnfToggle.classList.contains('active') ? 'DNF' : 'Aktiv';
+      persist();
+    });
+    delBtn.addEventListener('click', async ()=>{
+      if (!confirm(r.name + ' wirklich entfernen?')) return;
+      try{
+        await fbDelete('runners/' + r.id);
+        row.remove();
+      }catch(e){ alert('Löschen fehlgeschlagen: ' + (e.message || e)); }
+    });
+
+    return row;
+  }
+})();
+</script>
+</body>
+</html>
