@@ -70,13 +70,16 @@
     border:1px solid var(--line); border-radius:8px; padding:10px; margin-bottom:18px;
   }
   .athlete-gate-btn{
-    display:flex; align-items:center; justify-content:center; gap:7px; width:100%;
-    background: var(--surface); border:1px solid var(--line); color: var(--muted);
-    text-align:center; font-size:11px; font-weight:500; text-decoration:none;
-    text-transform:uppercase; letter-spacing:1px;
-    border-radius:8px; padding:11px; margin-bottom:18px;
+    display:block; width:100%;
+    background: none; border:none; color: var(--muted);
+    text-align:center; font-size:11px; font-weight:400;
+    letter-spacing:0.3px;
+    padding:8px; margin-bottom:14px; opacity: 0.55;
+    transition: opacity .35s ease, max-height .35s ease, margin .35s ease, padding .35s ease;
+    max-height: 40px; overflow:hidden;
   }
-  .athlete-gate-btn:active{ background: var(--surface-2); }
+  .athlete-gate-btn:active{ opacity: 0.85; }
+  .athlete-gate-btn.fading{ opacity: 0; max-height: 0; margin-bottom:0; padding-top:0; padding-bottom:0; }
   .livestream-link .live-dot{ width:7px; height:7px; border-radius:50%; background: var(--trail); display:inline-block; }
 
   /* Registration */
@@ -239,7 +242,7 @@
     </div>
 
     <!-- Athlete area: hidden by default, only visible via code -->
-    <button class="athlete-gate-btn" id="athleteGateBtn">🏃 Athlete? Enter code</button>
+    <button class="athlete-gate-btn" id="athleteGateBtn">Athlete? Enter code</button>
 
     <div class="card app-hidden" id="athletePinCard" style="margin-bottom:16px;">
       <p class="lead" style="margin-bottom:10px;">Enter athlete code.</p>
@@ -521,7 +524,9 @@
 
   function enterApp(){
     document.getElementById('athleteArea').classList.remove('app-hidden');
-    document.getElementById('athleteGateBtn').classList.add('app-hidden');
+    const gateBtn = document.getElementById('athleteGateBtn');
+    gateBtn.classList.add('fading');
+    setTimeout(()=> gateBtn.classList.add('app-hidden'), 350);
     registerCard.classList.add('app-hidden');
     document.getElementById('controls').classList.remove('app-hidden');
   }
@@ -801,7 +806,8 @@
     if (athletePinInput.value === ATHLETE_CODE){
       athletePinCard.classList.add('app-hidden');
       document.getElementById('athleteArea').classList.remove('app-hidden');
-      athleteGateBtn.classList.add('app-hidden');
+      athleteGateBtn.classList.add('fading');
+      setTimeout(()=> athleteGateBtn.classList.add('app-hidden'), 350);
     } else {
       athletePinError.textContent = 'Wrong code.';
     }
