@@ -197,7 +197,7 @@
 
 <div class="wrap">
   <div class="masthead">
-    <h1><span class="dot"></span>Burnout Ultra</h1>
+    <h1 id="homeLink" style="cursor:pointer;"><span class="dot"></span>Burnout Ultra</h1>
     <span style="display:flex; align-items:center; gap:10px;">
       <span class="live-tag" id="runnerCountTag">–</span>
       <button id="adminGearBtn" aria-label="Admin" style="background:none; border:none; color:var(--muted); font-size:16px; padding:4px; line-height:1;">⚙</button>
@@ -727,6 +727,14 @@
   }
 
   boot();
+
+  // ---------- Home link ----------
+  document.getElementById('homeLink').addEventListener('click', ()=>{
+    adminPanel.classList.add('app-hidden');
+    adminPinCard.classList.add('app-hidden');
+    athletePinCard.classList.add('app-hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   // ---------- Temperature Biel/Bienne (live, no API key) ----------
   async function fetchTemp(){
