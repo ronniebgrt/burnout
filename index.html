@@ -364,6 +364,10 @@
   const RACE_END = new Date(RACE_START.getTime() + RACE_HOURS * 3600000);
   const LOOP_KM = 5.3;
 
+  function completedLoops(now){
+    return Math.max(0, Math.min(RACE_HOURS, Math.floor((now - RACE_START) / 3600000)));
+  }
+
   // Debug/test: ?simHours=10 in the URL simulates "10h after race start",
   // without needing to change the system time. Runs normally from there.
   const urlParams = new URLSearchParams(location.search);
@@ -451,11 +455,6 @@
       flashMsg.classList.add('on');
       flashMsg.textContent = 'LAP ' + yardNumber;
       setTimeout(()=>{ flashOverlay.classList.remove('on'); flashMsg.classList.remove('on'); }, 900);
-
-      if (me && !dnf){
-        me.loops = (me.loops || 0) + 1;
-        upsertRunner();
-      }
     }
     lastRemaining = remainingSec;
   }
@@ -607,6 +606,9 @@
     dnf = !dnf;
     dnfStatus.textContent = dnf ? 'dropped out' : 'still in';
     dnfBtn.classList.toggle('active', dnf);
+    if (dnf){
+      me.loops = completedLoops(nowSim());
+    }
     upsertRunner();
   });
 
@@ -667,16 +669,18 @@
       return;
     }
     runners.sort((a,b)=> (a.status==='dnf') - (b.status==='dnf') || (b.loops||0) - (a.loops||0));
+    const liveLoops = completedLoops(nowSim());
     runnerList.innerHTML = runners.map(r=>{
-      const km = ((r.loops||0) * LOOP_KM).toFixed(1) + ' km';
       const isOut = r.status === 'dnf';
+      const loops = isOut ? (r.loops||0) : liveLoops;
+      const km = (loops * LOOP_KM).toFixed(1) + ' km';
       return '<div class="runner">' +
         '<div class="info">' +
           '<div class="name">' + escapeHtml(r.name) + (me && r.id === me.id ? ' (You)' : '') + '</div>' +
           '<div class="km">' + km + '</div>' +
         '</div>' +
         '<div class="status' + (isOut ? '' : ' is-active') + '">' + (isOut ? 'Out' : 'In') + '</div>' +
-        '<div class="round">' + (r.loops||0) + '/' + RACE_HOURS + '<br>' + km + '</div>' +
+        '<div class="round">' + loops + '/' + RACE_HOURS + '<br>' + km + '</div>' +
       '</div>';
     }).join('');
   }
@@ -893,10 +897,11 @@
     loopsInputEl.type = 'number';
     loopsInputEl.min = '0';
     loopsInputEl.step = '1';
-    loopsInputEl.value = r.loops || 0;
+    loopsInputEl.value = r.status === 'dnf' ? (r.loops || 0) : completedLoops(nowSim());
+    loopsInputEl.disabled = r.status !== 'dnf';
+    loopsInputEl.title = r.status === 'dnf' ? 'Loops (editable after DNF)' : 'Loops (live, edit only after DNF)';
     loopsInputEl.style.width = '54px';
     loopsInputEl.style.flexShrink = '0';
-    loopsInputEl.title = 'Loops';
 
     const kmLabel = document.createElement('span');
     kmLabel.style.fontSize = '12px';
