@@ -241,16 +241,7 @@
       <div class="sub" id="timerSub">until the next full hour</div>
     </div>
 
-    <!-- Athlete area: hidden by default, only visible via code -->
-    <button class="athlete-gate-btn" id="athleteGateBtn">Athlete? Enter code</button>
-
-    <div class="card app-hidden" id="athletePinCard" style="margin-bottom:16px;">
-      <p class="lead" style="margin-bottom:10px;">Enter athlete code.</p>
-      <input type="password" id="athletePinInput" placeholder="Code" inputmode="numeric" maxlength="12">
-      <button class="btn-primary" id="athletePinSubmit">Confirm</button>
-      <p class="error-msg" id="athletePinError"></p>
-    </div>
-
+    <!-- Athlete area: only the visibility-controlled controls stay here -->
     <div id="athleteArea" class="app-hidden">
       <!-- Registration: only visible as long as you are not registered yourself -->
       <div class="card" id="registerCard" style="margin-bottom:18px;">
@@ -284,6 +275,16 @@
     </div>
     <div class="card" style="padding: 6px 14px;">
       <div id="runnerList"><div class="empty-state">No one visible yet.</div></div>
+    </div>
+
+    <!-- Athlete access: placed at the very bottom, so it's not immediately visible -->
+    <button class="athlete-gate-btn" id="athleteGateBtn">Athlete? Enter code</button>
+
+    <div class="card app-hidden" id="athletePinCard" style="margin-bottom:16px;">
+      <p class="lead" style="margin-bottom:10px;">Enter athlete code.</p>
+      <input type="password" id="athletePinInput" placeholder="Code" inputmode="numeric" maxlength="12">
+      <button class="btn-primary" id="athletePinSubmit">Confirm</button>
+      <p class="error-msg" id="athletePinError"></p>
     </div>
   </div>
 </div>
@@ -808,6 +809,7 @@
       document.getElementById('athleteArea').classList.remove('app-hidden');
       athleteGateBtn.classList.add('fading');
       setTimeout(()=> athleteGateBtn.classList.add('app-hidden'), 350);
+      document.getElementById('athleteArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
       athletePinError.textContent = 'Wrong code.';
     }
