@@ -189,17 +189,10 @@
     <h1><span class="dot"></span>Burnout Ultra</h1>
     <span style="display:flex; align-items:center; gap:10px;">
       <span class="live-tag" id="runnerCountTag">–</span>
-      <button id="simGearBtn" aria-label="Zeit simulieren" style="background:none; border:none; color:var(--muted); font-size:16px; padding:4px; line-height:1;">🕐</button>
       <button id="adminGearBtn" aria-label="Admin" style="background:none; border:none; color:var(--muted); font-size:16px; padding:4px; line-height:1;">⚙</button>
     </span>
   </div>
   <div class="event-info" id="eventInfo">Sa 5. Sept · Start 16:00 · Biel/Bienne</div>
-
-  <!-- Zeit-Simulation (Testen ohne Systemzeit zu ändern) -->
-  <div class="card app-hidden" id="simPanel" style="margin-bottom:16px;">
-    <p class="lead" style="margin-bottom:10px;">Zeitpunkt simulieren:</p>
-    <div id="simButtons" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
-  </div>
   <div class="stat-strip">
     <div class="stat"><div class="k">Loop</div><div class="v" id="statLoopValue">–</div></div>
     <div class="stat"><div class="k">Distanz</div><div class="v" id="statDistValue">0.0 km</div></div>
@@ -223,19 +216,13 @@
       <button id="adminCloseBtn" style="background:none; border:none; color:var(--muted); font-size:13px; padding:4px;">Schliessen</button>
     </div>
     <div id="adminList"><div class="empty-state">Lädt …</div></div>
+
+    <p style="font-weight:600; font-size:13px; margin:18px 0 10px;">Zeitpunkt simulieren</p>
+    <div id="simButtons" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
   </div>
 
-  <!-- Registration -->
-  <div class="card" id="registerCard">
-    <p class="lead">Trag dich als Teilnehmer:in ein. Dein Name und Standort werden während des Rennens mit allen anderen geteilt.</p>
-    <input type="text" id="nameInput" placeholder="Anzeigename" maxlength="30">
-    <input type="email" id="emailInput" placeholder="E-Mail" maxlength="80" style="margin-top:10px;">
-    <button class="btn-primary" id="joinBtn">Registrieren</button>
-    <p class="error-msg" id="registerError"></p>
-  </div>
-
-  <!-- Main app -->
-  <div id="appView" class="app-hidden">
+  <!-- Main app: immer sichtbar, auch für Zuschauer ohne Registrierung -->
+  <div id="appView">
 
     <div class="hero">
       <div class="lap-label" id="lapLabel">Runde –</div>
@@ -243,15 +230,36 @@
       <div class="sub" id="timerSub">bis zur nächsten vollen Stunde</div>
     </div>
 
-    <div class="controls">
-      <button class="btn-toggle" id="shareBtn">
-        Standort teilen
-        <span class="k" id="shareStatus">aus</span>
-      </button>
-      <button class="btn-toggle danger" id="dnfBtn">
-        Aufgeben
-        <span class="k" id="dnfStatus">noch dabei</span>
-      </button>
+    <!-- Athleten-Bereich: standardmässig verborgen, nur per Code sichtbar -->
+    <button class="livestream-link" id="athleteGateBtn" style="margin-bottom:10px;">🏃 Athlet:in? Code eingeben</button>
+
+    <div class="card app-hidden" id="athletePinCard" style="margin-bottom:16px;">
+      <p class="lead" style="margin-bottom:10px;">Athleten-Code eingeben.</p>
+      <input type="password" id="athletePinInput" placeholder="Code" inputmode="numeric" maxlength="12">
+      <button class="btn-primary" id="athletePinSubmit">Bestätigen</button>
+      <p class="error-msg" id="athletePinError"></p>
+    </div>
+
+    <div id="athleteArea" class="app-hidden">
+      <!-- Registrierung: nur sichtbar, solange man nicht selbst Teilnehmer:in ist -->
+      <div class="card" id="registerCard" style="margin-bottom:18px;">
+        <p class="lead">Bist du selbst am Start? Trag dich ein, um deinen Standort zu teilen.</p>
+        <input type="text" id="nameInput" placeholder="Anzeigename" maxlength="30">
+        <input type="email" id="emailInput" placeholder="E-Mail" maxlength="80" style="margin-top:10px;">
+        <button class="btn-primary" id="joinBtn">Als Teilnehmer:in registrieren</button>
+        <p class="error-msg" id="registerError"></p>
+      </div>
+
+      <div class="controls app-hidden" id="controls">
+        <button class="btn-toggle" id="shareBtn">
+          Standort teilen
+          <span class="k" id="shareStatus">aus</span>
+        </button>
+        <button class="btn-toggle danger" id="dnfBtn">
+          Aufgeben
+          <span class="k" id="dnfStatus">noch dabei</span>
+        </button>
+      </div>
     </div>
 
     <div id="map"></div>
@@ -504,10 +512,10 @@
   });
 
   function enterApp(){
+    document.getElementById('athleteArea').classList.remove('app-hidden');
+    document.getElementById('athleteGateBtn').classList.add('app-hidden');
     registerCard.classList.add('app-hidden');
-    appView.classList.remove('app-hidden');
-    initMap();
-    refreshRunners();
+    document.getElementById('controls').classList.remove('app-hidden');
   }
 
   // ---------- Location sharing ----------
@@ -596,7 +604,7 @@
       touchZoom: false, boxZoom: false, keyboard: false, tap: false
     }).setView(FALLBACK_CENTER, 13);
 
-    const loopLine = L.polyline(LOOP_COORDS, { color: getComputedStyle(document.documentElement).getPropertyValue('--trail').trim() || '#d6392c', weight: 4, opacity: 0.9 }).addTo(map);
+    const loopLine = L.polyline(LOOP_COORDS, { color: getComputedStyle(document.documentElement).getPropertyValue('--trail').trim() || '#d6392c', weight: 2, opacity: 0.9 }).addTo(map);
     const startIcon = L.divIcon({ className:'', html: '<div style="width:12px;height:12px;border-radius:3px;background:#fff;border:2px solid var(--trail);"></div>', iconSize:[12,12] });
     L.marker(LOOP_COORDS[0], { icon: startIcon }).addTo(map).bindPopup('Start / Ziel');
 
@@ -606,7 +614,7 @@
   }
 
   function colorFor(status){
-    return status === 'dnf' ? '#8f4a3d' : '#d6392c';
+    return status === 'dnf' ? '#7a756e' : '#ede9e1';
   }
 
   function updateMapMarkers(runners){
@@ -650,7 +658,7 @@
       const isOut = r.status === 'dnf';
       return '<div class="runner">' +
         '<div class="info">' +
-          '<div class="name">' + escapeHtml(r.name) + (r.id === me.id ? ' (Du)' : '') + '</div>' +
+          '<div class="name">' + escapeHtml(r.name) + (me && r.id === me.id ? ' (Du)' : '') + '</div>' +
           '<div class="km">' + km + '</div>' +
         '</div>' +
         '<div class="status' + (isOut ? '' : ' is-active') + '">' + (isOut ? 'Out' : 'In') + '</div>' +
@@ -681,6 +689,9 @@
     tickTimer();
     setInterval(tickTimer, 1000);
 
+    initMap();
+    refreshRunners();
+
     const existing = loadMe();
     if (existing){
       me = existing;
@@ -698,7 +709,7 @@
       enterApp();
     }
 
-    setInterval(()=>{ if (appView && !appView.classList.contains('app-hidden')) refreshRunners(); }, 5000);
+    setInterval(refreshRunners, 5000);
   }
 
   boot();
@@ -760,9 +771,35 @@
     adminPanel.classList.add('app-hidden');
   });
 
+  // ---------- Athleten-Zugang ----------
+  // Eigener Code für Athlet:innen (getrennt vom Admin-PIN). Zum Ändern
+  // einfach den Wert unten anpassen.
+  const ATHLETE_CODE = '5300';
+
+  const athleteGateBtn = document.getElementById('athleteGateBtn');
+  const athletePinCard = document.getElementById('athletePinCard');
+  const athletePinInput = document.getElementById('athletePinInput');
+  const athletePinSubmit = document.getElementById('athletePinSubmit');
+  const athletePinError = document.getElementById('athletePinError');
+
+  athleteGateBtn.addEventListener('click', ()=>{
+    athletePinCard.classList.toggle('app-hidden');
+    athletePinInput.value = '';
+    athletePinError.textContent = '';
+    if (!athletePinCard.classList.contains('app-hidden')) athletePinInput.focus();
+  });
+
+  athletePinSubmit.addEventListener('click', ()=>{
+    if (athletePinInput.value === ATHLETE_CODE){
+      athletePinCard.classList.add('app-hidden');
+      document.getElementById('athleteArea').classList.remove('app-hidden');
+      athleteGateBtn.classList.add('app-hidden');
+    } else {
+      athletePinError.textContent = 'Falscher Code.';
+    }
+  });
+
   // ---------- Zeit-Simulation ----------
-  const simGearBtn = document.getElementById('simGearBtn');
-  const simPanel = document.getElementById('simPanel');
   const simButtons = document.getElementById('simButtons');
 
   const SIM_PRESETS = [
@@ -793,10 +830,6 @@
       location.href = url.toString();
     });
     simButtons.appendChild(btn);
-  });
-
-  simGearBtn.addEventListener('click', ()=>{
-    simPanel.classList.toggle('app-hidden');
   });
 
   async function loadAdminList(){
@@ -832,17 +865,31 @@
     dnfToggle.className = 'admin-icon-btn' + (r.status === 'dnf' ? ' danger active' : '');
     dnfToggle.textContent = r.status === 'dnf' ? 'DNF' : 'Aktiv';
 
+    const loopsInputEl = document.createElement('input');
+    loopsInputEl.type = 'number';
+    loopsInputEl.min = '0';
+    loopsInputEl.step = '1';
+    loopsInputEl.value = r.loops || 0;
+    loopsInputEl.style.width = '54px';
+    loopsInputEl.style.flexShrink = '0';
+    loopsInputEl.title = 'Loops';
+
     const kmLabel = document.createElement('span');
     kmLabel.style.fontSize = '12px';
     kmLabel.style.color = 'var(--muted)';
     kmLabel.style.whiteSpace = 'nowrap';
-    kmLabel.textContent = (r.loops||0) + ' Loops · ' + ((r.loops||0) * LOOP_KM).toFixed(1) + ' km';
+    function updateKmLabel(){
+      kmLabel.textContent = ((parseInt(loopsInputEl.value)||0) * LOOP_KM).toFixed(1) + ' km';
+    }
+    updateKmLabel();
+    loopsInputEl.addEventListener('input', updateKmLabel);
 
     const delBtn = document.createElement('button');
     delBtn.className = 'admin-icon-btn danger';
     delBtn.textContent = 'Löschen';
 
     top.appendChild(nameInputEl);
+    top.appendChild(loopsInputEl);
     top.appendChild(kmLabel);
     top.appendChild(dnfToggle);
     top.appendChild(delBtn);
@@ -859,6 +906,7 @@
       const updated = Object.assign({}, r, {
         name: nameInputEl.value.trim() || r.name,
         email: emailInputEl.value.trim(),
+        loops: parseInt(loopsInputEl.value) || 0,
         status: dnfToggle.classList.contains('active') ? 'dnf' : 'active',
         updatedAt: nowMs()
       });
@@ -869,6 +917,7 @@
 
     nameInputEl.addEventListener('change', persist);
     emailInputEl.addEventListener('change', persist);
+    loopsInputEl.addEventListener('change', persist);
     dnfToggle.addEventListener('click', ()=>{
       dnfToggle.classList.toggle('active');
       dnfToggle.classList.toggle('danger');
