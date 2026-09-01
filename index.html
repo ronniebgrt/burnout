@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
@@ -69,6 +69,14 @@
     text-transform:uppercase; letter-spacing:1.2px;
     border:1px solid var(--line); border-radius:8px; padding:10px; margin-bottom:18px;
   }
+  .athlete-gate-btn{
+    display:flex; align-items:center; justify-content:center; gap:7px; width:100%;
+    background: var(--surface); border:1px solid var(--line); color: var(--muted);
+    text-align:center; font-size:11px; font-weight:500; text-decoration:none;
+    text-transform:uppercase; letter-spacing:1px;
+    border-radius:8px; padding:11px; margin-bottom:18px;
+  }
+  .athlete-gate-btn:active{ background: var(--surface-2); }
   .livestream-link .live-dot{ width:7px; height:7px; border-radius:50%; background: var(--trail); display:inline-block; }
 
   /* Registration */
@@ -153,7 +161,7 @@
   .runner .status.is-active{ color: var(--trail); }
   .runner .round{
     font-family:'JetBrains Mono', monospace; font-size:12px; color: var(--muted);
-    width:56px; text-align:right; flex-shrink:0;
+    width:64px; text-align:right; flex-shrink:0; line-height:1.5;
   }
   .empty-state{ color: var(--muted); font-size: 13px; padding: 14px 4px; }
 
@@ -182,7 +190,7 @@
 
 <div class="diag-banner" id="diagBanner"></div>
 <div class="flash-overlay" id="flashOverlay"></div>
-<div class="flash-msg" id="flashMsg">NEUE RUNDE</div>
+<div class="flash-msg" id="flashMsg">NEW LAP</div>
 
 <div class="wrap">
   <div class="masthead">
@@ -192,72 +200,72 @@
       <button id="adminGearBtn" aria-label="Admin" style="background:none; border:none; color:var(--muted); font-size:16px; padding:4px; line-height:1;">⚙</button>
     </span>
   </div>
-  <div class="event-info" id="eventInfo">Sa 5. Sept · Start 16:00 · Biel/Bienne</div>
+  <div class="event-info" id="eventInfo">Sat Sep 5 · Start 4pm · Biel/Bienne</div>
   <div class="stat-strip">
     <div class="stat"><div class="k">Loop</div><div class="v" id="statLoopValue">–</div></div>
-    <div class="stat"><div class="k">Distanz</div><div class="v" id="statDistValue">0.0 km</div></div>
-    <div class="stat"><div class="k">Zeit</div><div class="v" id="statTimeValue">–</div></div>
+    <div class="stat"><div class="k">Distance</div><div class="v" id="statDistValue">0.0 km</div></div>
+    <div class="stat"><div class="k">Time</div><div class="v" id="statTimeValue">–</div></div>
     <div class="stat"><div class="k">Temp</div><div class="v" id="statTempValue">–°</div></div>
   </div>
   <a class="livestream-link" href="https://burnoutultra.com/stream/" target="_blank" rel="noopener"><span class="live-dot"></span>Livestream</a>
 
   <!-- Admin PIN gate -->
   <div class="card app-hidden" id="adminPinCard" style="margin-bottom:16px;">
-    <p class="lead" style="margin-bottom:10px;">Admin-PIN eingeben.</p>
+    <p class="lead" style="margin-bottom:10px;">Enter admin PIN.</p>
     <input type="password" id="adminPinInput" placeholder="PIN" inputmode="numeric" maxlength="12">
-    <button class="btn-primary" id="adminPinSubmit">Bestätigen</button>
+    <button class="btn-primary" id="adminPinSubmit">Confirm</button>
     <p class="error-msg" id="adminPinError"></p>
   </div>
 
   <!-- Admin panel -->
   <div class="card app-hidden" id="adminPanel" style="margin-bottom:20px; padding: 14px 14px;">
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
-      <p style="font-weight:600; font-size:14px; margin:0;">Teilnehmer verwalten</p>
-      <button id="adminCloseBtn" style="background:none; border:none; color:var(--muted); font-size:13px; padding:4px;">Schliessen</button>
+      <p style="font-weight:600; font-size:14px; margin:0;">Manage participants</p>
+      <button id="adminCloseBtn" style="background:none; border:none; color:var(--muted); font-size:13px; padding:4px;">Close</button>
     </div>
-    <div id="adminList"><div class="empty-state">Lädt …</div></div>
+    <div id="adminList"><div class="empty-state">Loading …</div></div>
 
-    <p style="font-weight:600; font-size:13px; margin:18px 0 10px;">Zeitpunkt simulieren</p>
+    <p style="font-weight:600; font-size:13px; margin:18px 0 10px;">Simulate time</p>
     <div id="simButtons" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
   </div>
 
-  <!-- Main app: immer sichtbar, auch für Zuschauer ohne Registrierung -->
+  <!-- Main app: always visible, even for spectators without registration -->
   <div id="appView">
 
     <div class="hero">
-      <div class="lap-label" id="lapLabel">Runde –</div>
+      <div class="lap-label" id="lapLabel">Lap –</div>
       <div class="timer" id="timerDisplay">--:--</div>
-      <div class="sub" id="timerSub">bis zur nächsten vollen Stunde</div>
+      <div class="sub" id="timerSub">until the next full hour</div>
     </div>
 
-    <!-- Athleten-Bereich: standardmässig verborgen, nur per Code sichtbar -->
-    <button class="livestream-link" id="athleteGateBtn" style="margin-bottom:10px;">🏃 Athlet:in? Code eingeben</button>
+    <!-- Athlete area: hidden by default, only visible via code -->
+    <button class="athlete-gate-btn" id="athleteGateBtn">🏃 Athlete? Enter code</button>
 
     <div class="card app-hidden" id="athletePinCard" style="margin-bottom:16px;">
-      <p class="lead" style="margin-bottom:10px;">Athleten-Code eingeben.</p>
+      <p class="lead" style="margin-bottom:10px;">Enter athlete code.</p>
       <input type="password" id="athletePinInput" placeholder="Code" inputmode="numeric" maxlength="12">
-      <button class="btn-primary" id="athletePinSubmit">Bestätigen</button>
+      <button class="btn-primary" id="athletePinSubmit">Confirm</button>
       <p class="error-msg" id="athletePinError"></p>
     </div>
 
     <div id="athleteArea" class="app-hidden">
-      <!-- Registrierung: nur sichtbar, solange man nicht selbst Teilnehmer:in ist -->
+      <!-- Registration: only visible as long as you are not registered yourself -->
       <div class="card" id="registerCard" style="margin-bottom:18px;">
-        <p class="lead">Bist du selbst am Start? Trag dich ein, um deinen Standort zu teilen.</p>
-        <input type="text" id="nameInput" placeholder="Anzeigename" maxlength="30">
-        <input type="email" id="emailInput" placeholder="E-Mail" maxlength="80" style="margin-top:10px;">
-        <button class="btn-primary" id="joinBtn">Als Teilnehmer:in registrieren</button>
+        <p class="lead">Are you racing yourself? Sign up to share your location.</p>
+        <input type="text" id="nameInput" placeholder="Display name" maxlength="30">
+        <input type="email" id="emailInput" placeholder="Email" maxlength="80" style="margin-top:10px;">
+        <button class="btn-primary" id="joinBtn">Register as participant</button>
         <p class="error-msg" id="registerError"></p>
       </div>
 
       <div class="controls app-hidden" id="controls">
         <button class="btn-toggle" id="shareBtn">
-          Standort teilen
-          <span class="k" id="shareStatus">aus</span>
+          Share location
+          <span class="k" id="shareStatus">off</span>
         </button>
         <button class="btn-toggle danger" id="dnfBtn">
-          Aufgeben
-          <span class="k" id="dnfStatus">noch dabei</span>
+          Give up
+          <span class="k" id="dnfStatus">still in</span>
         </button>
       </div>
     </div>
@@ -265,20 +273,20 @@
     <div id="map"></div>
 
     <div class="section-label">
-      <span>Live — Teilnehmer:innen</span>
+      <span>Live — Participants</span>
       <span id="lastSync">–</span>
     </div>
     <div class="table-head">
-      <span>Athlet:in</span><span>Status</span><span>Runde</span>
+      <span>Athlete</span><span>Status</span><span>Lap</span>
     </div>
     <div class="card" style="padding: 6px 14px;">
-      <div id="runnerList"><div class="empty-state">Noch niemand sichtbar.</div></div>
+      <div id="runnerList"><div class="empty-state">No one visible yet.</div></div>
     </div>
   </div>
 </div>
 
 <script>
-// ---- Sichtbare Fehlerdiagnose (läuft vor allem anderen) ----
+// ---- Visible error diagnostics (runs before everything else) ----
 (function(){
   const banner = document.getElementById('diagBanner');
   function showDiag(msg){
@@ -286,10 +294,10 @@
     banner.classList.add('show');
   }
   window.addEventListener('error', function(e){
-    showDiag('Fehler: ' + (e.message || 'unbekannt') + (e.filename ? ' (' + e.filename.split('/').pop() + ':' + e.lineno + ')' : ''));
+    showDiag('Error: ' + (e.message || 'unknown') + (e.filename ? ' (' + e.filename.split('/').pop() + ':' + e.lineno + ')' : ''));
   });
   window.addEventListener('unhandledrejection', function(e){
-    showDiag('Fehler: ' + (e.reason && e.reason.message ? e.reason.message : String(e.reason)));
+    showDiag('Error: ' + (e.reason && e.reason.message ? e.reason.message : String(e.reason)));
   });
 })();
 </script>
@@ -320,13 +328,13 @@
   let markers = {};
   let lastRemaining = null;
 
-  const FALLBACK_CENTER = [46.95, 7.45]; // Schweiz, neutraler Startpunkt
+  const FALLBACK_CENTER = [46.95, 7.45]; // Switzerland, neutral fallback point
 
-  // Firebase Realtime Database (ersetzt window.storage, das ausserhalb von Claude nicht existiert)
+  // Firebase Realtime Database (replaces window.storage, which doesn't exist outside Claude)
   const FIREBASE_URL = 'https://burnout-5c130-default-rtdb.europe-west1.firebasedatabase.app';
   async function fbGet(path){
     const res = await fetch(FIREBASE_URL + '/' + path + '.json');
-    if (!res.ok) throw new Error('Firebase GET fehlgeschlagen (' + res.status + ')');
+    if (!res.ok) throw new Error('Firebase GET failed (' + res.status + ')');
     return res.json();
   }
   async function fbSet(path, value){
@@ -335,25 +343,25 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(value)
     });
-    if (!res.ok) throw new Error('Firebase SET fehlgeschlagen (' + res.status + ')');
+    if (!res.ok) throw new Error('Firebase SET failed (' + res.status + ')');
     return res.json();
   }
   async function fbDelete(path){
     const res = await fetch(FIREBASE_URL + '/' + path + '.json', { method: 'DELETE' });
-    if (!res.ok) throw new Error('Firebase DELETE fehlgeschlagen (' + res.status + ')');
+    if (!res.ok) throw new Error('Firebase DELETE failed (' + res.status + ')');
   }
 
-  // Offizielle Loop-Strecke (5.3 km), aus der Strava-GPX-Aufzeichnung
+  // Official loop route (5.3 km), from the Strava GPX recording
   const LOOP_COORDS = [[47.13826, 7.253817], [47.138408, 7.253873], [47.138678, 7.253649], [47.13894, 7.253398], [47.139177, 7.253583], [47.13942, 7.253957], [47.13956, 7.254376], [47.139714, 7.254812], [47.139845, 7.255235], [47.140001, 7.255683], [47.140139, 7.256125], [47.140302, 7.25651], [47.140607, 7.256511], [47.140945, 7.256552], [47.141259, 7.256634], [47.141498, 7.256858], [47.141726, 7.256654], [47.141911, 7.257004], [47.1421, 7.257398], [47.142249, 7.257847], [47.142343, 7.258275], [47.142395, 7.258772], [47.142447, 7.25926], [47.142455, 7.259752], [47.142467, 7.260179], [47.142633, 7.260631], [47.142882, 7.260973], [47.143177, 7.261175], [47.143461, 7.261299], [47.143683, 7.261617], [47.143852, 7.262032], [47.143959, 7.262505], [47.144038, 7.262926], [47.14415, 7.263393], [47.144306, 7.263822], [47.144504, 7.2642], [47.144643, 7.264577], [47.144733, 7.265023], [47.144818, 7.265496], [47.145086, 7.265752], [47.14539, 7.265828], [47.145643, 7.266144], [47.14595, 7.266358], [47.146095, 7.266768], [47.146195, 7.267182], [47.1463, 7.267647], [47.14642, 7.268086], [47.146644, 7.268459], [47.146885, 7.268705], [47.147082, 7.269073], [47.147379, 7.269251], [47.147395, 7.269691], [47.14759, 7.270049], [47.147832, 7.270339], [47.148072, 7.270628], [47.148368, 7.270913], [47.148674, 7.270915], [47.149004, 7.270909], [47.149349, 7.270938], [47.149677, 7.270966], [47.149985, 7.270998], [47.150321, 7.270928], [47.150644, 7.270784], [47.150905, 7.270513], [47.151146, 7.270267], [47.151422, 7.270007], [47.151678, 7.269724], [47.151876, 7.269943], [47.152024, 7.27029], [47.151752, 7.270547], [47.151492, 7.270835], [47.151179, 7.271036], [47.150917, 7.271203], [47.150605, 7.271343], [47.150274, 7.271438], [47.149936, 7.27155], [47.149632, 7.271671], [47.149393, 7.271607], [47.14912, 7.271419], [47.148795, 7.271522], [47.148515, 7.271606], [47.148361, 7.271356], [47.148351, 7.271014], [47.148113, 7.270661], [47.147884, 7.270356], [47.147619, 7.270042], [47.147407, 7.269683], [47.147371, 7.269177], [47.147078, 7.26902], [47.146863, 7.268631], [47.14658, 7.268338], [47.146379, 7.267926], [47.146284, 7.26749], [47.146167, 7.267024], [47.146066, 7.266565], [47.145822, 7.266239], [47.145567, 7.266003], [47.145284, 7.265754], [47.144933, 7.265674], [47.144776, 7.265262], [47.144708, 7.264805], [47.14457, 7.264336], [47.144379, 7.26392], [47.144204, 7.263491], [47.144093, 7.263055], [47.144002, 7.262583], [47.143896, 7.262096], [47.143741, 7.261652], [47.143536, 7.261295], [47.143208, 7.261136], [47.142892, 7.260929], [47.142602, 7.260639], [47.142462, 7.260218], [47.142454, 7.259707], [47.142439, 7.259195], [47.142393, 7.258702], [47.14235, 7.258251], [47.142262, 7.257778], [47.142101, 7.257329], [47.141915, 7.256907], [47.141732, 7.256621], [47.141463, 7.256837], [47.141216, 7.256597], [47.140886, 7.256514], [47.140571, 7.256447], [47.140266, 7.256437], [47.140107, 7.256044], [47.139973, 7.255613], [47.13984, 7.255203], [47.139696, 7.254761], [47.139559, 7.254357], [47.139372, 7.253927], [47.139175, 7.253588], [47.138892, 7.253335], [47.138595, 7.253194], [47.138254, 7.253083], [47.137965, 7.25298], [47.137658, 7.25289], [47.137334, 7.252767], [47.13703, 7.252734], [47.137179, 7.253122], [47.137369, 7.25353], [47.137564, 7.253956], [47.137753, 7.25436], [47.137954, 7.254341], [47.138245, 7.254206], [47.138205, 7.253849]];
 
-  // Fixer Renn-Start: Samstag 5. September 2026, 16:00 Uhr, Dauer 24h
+  // Fixed race start: Saturday Sep 5, 2026, 4pm, 24h duration
   const RACE_START = new Date(2026, 8, 5, 16, 0, 0);
   const RACE_HOURS = 24;
   const RACE_END = new Date(RACE_START.getTime() + RACE_HOURS * 3600000);
   const LOOP_KM = 5.3;
 
-  // Debug/Test: ?simHours=10 in der URL simuliert "10h nach Rennstart",
-  // ohne die Systemzeit ändern zu müssen. Läuft ab da normal weiter.
+  // Debug/test: ?simHours=10 in the URL simulates "10h after race start",
+  // without needing to change the system time. Runs normally from there.
   const urlParams = new URLSearchParams(location.search);
   const simHoursParam = urlParams.get('simHours');
   const SIM_OFFSET_MS = (simHoursParam !== null && !isNaN(parseFloat(simHoursParam)))
@@ -391,12 +399,12 @@
   function tickTimer(){
     const now = nowSim();
 
-    // Vor dem Start: Countdown bis 16:00
+    // Before start: countdown to 4pm
     if (now < RACE_START){
       timerDisplay.textContent = fmtDur(RACE_START - now);
       timerDisplay.classList.remove('urgent');
-      lapLabel.textContent = 'Start in';
-      timerSub.textContent = 'Sa 5. Sept, 16:00 Uhr';
+      lapLabel.textContent = 'Starts in';
+      timerSub.textContent = 'Sat Sep 5, 4pm';
       document.getElementById('statLoopValue').textContent = '–';
       document.getElementById('statTimeValue').textContent = fmtDurWithDays(RACE_START - now);
       document.getElementById('statDistValue').textContent = '0.0 km';
@@ -404,12 +412,12 @@
       return;
     }
 
-    // Nach 24h: Rennen vorbei
+    // After 24h: race over
     if (now >= RACE_END){
       timerDisplay.textContent = '00:00';
       timerDisplay.classList.remove('urgent');
-      lapLabel.textContent = 'Rennen beendet';
-      timerSub.textContent = '24 h erreicht';
+      lapLabel.textContent = 'Race finished';
+      timerSub.textContent = '24h reached';
       document.getElementById('statLoopValue').textContent = RACE_HOURS + '/' + RACE_HOURS;
       document.getElementById('statTimeValue').textContent = fmtDurWithDays(RACE_END - RACE_START);
       document.getElementById('statDistValue').textContent = (RACE_HOURS * LOOP_KM).toFixed(1) + ' km';
@@ -417,7 +425,7 @@
       return;
     }
 
-    // Während des Rennens: Countdown zur nächsten vollen Stunde + Yard-Nummer
+    // During the race: countdown to the next full hour + lap number
     const boundary = nextHourBoundary(now);
     const remainingMs = boundary - now;
     const remainingSec = Math.max(0, Math.floor(remainingMs/1000));
@@ -428,8 +436,8 @@
 
     const yardNumber = Math.floor((now - RACE_START) / 3600000) + 1;
     const curHour = new Date(boundary); curHour.setHours(curHour.getHours()-1);
-    lapLabel.textContent = 'Yard ' + yardNumber + ' von ' + RACE_HOURS + ' · ' + pad(curHour.getHours()) + ':00–' + pad(boundary.getHours()) + ':00';
-    timerSub.textContent = 'bis zur nächsten vollen Stunde';
+    lapLabel.textContent = 'Lap ' + yardNumber + ' of ' + RACE_HOURS + ' · ' + pad(curHour.getHours()) + ':00–' + pad(boundary.getHours()) + ':00';
+    timerSub.textContent = 'until the next full hour';
     document.getElementById('statLoopValue').textContent = yardNumber + '/' + RACE_HOURS;
     document.getElementById('statTimeValue').textContent = fmtDurWithDays(now - RACE_START);
     document.getElementById('statDistValue').textContent = (yardNumber * LOOP_KM).toFixed(1) + ' km';
@@ -437,7 +445,7 @@
     if (lastRemaining !== null && remainingSec > lastRemaining){
       flashOverlay.classList.add('on');
       flashMsg.classList.add('on');
-      flashMsg.textContent = 'YARD ' + yardNumber;
+      flashMsg.textContent = 'LAP ' + yardNumber;
       setTimeout(()=>{ flashOverlay.classList.remove('on'); flashMsg.classList.remove('on'); }, 900);
 
       if (me && !dnf){
@@ -460,7 +468,7 @@
     try{
       localStorage.setItem('burnoutUltraMe', JSON.stringify(m));
     }catch(e){
-      console.warn('Lokale Kennung konnte nicht gespeichert werden', e);
+      console.warn('Could not save local identity', e);
     }
   }
 
@@ -490,24 +498,24 @@
     const email = document.getElementById('emailInput').value.trim();
     if (!name){ nameInput.focus(); return; }
     if (!email || !isValidEmail(email)){
-      errEl.textContent = 'Bitte eine gültige E-Mail-Adresse eingeben.';
+      errEl.textContent = 'Please enter a valid email address.';
       document.getElementById('emailInput').focus();
       return;
     }
 
     joinBtn.disabled = true;
-    joinBtn.textContent = 'Registriere …';
+    joinBtn.textContent = 'Registering …';
     try{
       me = { id: crypto.randomUUID(), name: name, email: email };
       saveMe(me);
       await upsertRunner();
       enterApp();
     }catch(e){
-      console.error('Registrierung fehlgeschlagen', e);
-      errEl.textContent = 'Registrierung fehlgeschlagen: ' + (e && e.message ? e.message : 'unbekannter Fehler') + '. Bitte nochmal versuchen.';
+      console.error('Registration failed', e);
+      errEl.textContent = 'Registration failed: ' + (e && e.message ? e.message : 'unknown error') + '. Please try again.';
       me = null;
       joinBtn.disabled = false;
-      joinBtn.textContent = 'Registrieren';
+      joinBtn.textContent = 'Register';
     }
   });
 
@@ -521,7 +529,7 @@
   // ---------- Location sharing ----------
   function toggleShare(){
     sharing = !sharing;
-    shareStatus.textContent = sharing ? 'an' : 'aus';
+    shareStatus.textContent = sharing ? 'on' : 'off';
     shareBtn.classList.toggle('active', sharing);
     if (sharing){
       startWatching();
@@ -533,8 +541,8 @@
 
   function startWatching(){
     if (!navigator.geolocation){
-      alert('Standort wird von diesem Browser nicht unterstützt.');
-      sharing = false; shareStatus.textContent = 'aus'; shareBtn.classList.remove('active');
+      alert('Location is not supported by this browser.');
+      sharing = false; shareStatus.textContent = 'off'; shareBtn.classList.remove('active');
       return;
     }
     watchId = navigator.geolocation.watchPosition(
@@ -545,7 +553,7 @@
       },
       (err)=>{
         console.error(err);
-        shareStatus.textContent = 'Fehler';
+        shareStatus.textContent = 'Error';
       },
       { enableHighAccuracy: true, maximumAge: 10000, timeout: 15000 }
     );
@@ -560,20 +568,20 @@
     releaseWakeLock();
   }
 
-  // Bildschirm wach halten, solange Standort geteilt wird (falls vom Browser unterstützt)
+  // Keep the screen awake while location is being shared (if supported by the browser)
   let wakeLock = null;
   async function requestWakeLock(){
     if (!sharing || !('wakeLock' in navigator)) return;
     try{
       wakeLock = await navigator.wakeLock.request('screen');
       wakeLock.addEventListener('release', ()=>{ wakeLock = null; });
-    }catch(e){ console.warn('Wake Lock nicht verfügbar', e); }
+    }catch(e){ console.warn('Wake Lock not available', e); }
   }
   function releaseWakeLock(){
     if (wakeLock){ wakeLock.release().catch(()=>{}); wakeLock = null; }
   }
 
-  // Sofort Standort + Läuferliste nachholen, sobald die Seite wieder sichtbar wird
+  // Immediately refresh location + runner list as soon as the page becomes visible again
   document.addEventListener('visibilitychange', ()=>{
     if (document.visibilityState === 'visible'){
       if (sharing && navigator.geolocation){
@@ -591,7 +599,7 @@
   // ---------- DNF ----------
   dnfBtn.addEventListener('click', ()=>{
     dnf = !dnf;
-    dnfStatus.textContent = dnf ? 'ausgeschieden' : 'noch dabei';
+    dnfStatus.textContent = dnf ? 'dropped out' : 'still in';
     dnfBtn.classList.toggle('active', dnf);
     upsertRunner();
   });
@@ -606,7 +614,7 @@
 
     const loopLine = L.polyline(LOOP_COORDS, { color: getComputedStyle(document.documentElement).getPropertyValue('--trail').trim() || '#d6392c', weight: 2, opacity: 0.9 }).addTo(map);
     const startIcon = L.divIcon({ className:'', html: '<div style="width:12px;height:12px;border-radius:3px;background:#fff;border:2px solid var(--trail);"></div>', iconSize:[12,12] });
-    L.marker(LOOP_COORDS[0], { icon: startIcon }).addTo(map).bindPopup('Start / Ziel');
+    L.marker(LOOP_COORDS[0], { icon: startIcon }).addTo(map).bindPopup('Start / Finish');
 
     const bounds = loopLine.getBounds();
     map.fitBounds(bounds, { padding: [4,4] });
@@ -640,16 +648,16 @@
   // ---------- Runner list / sync ----------
   function timeAgo(ts){
     const s = Math.floor((nowMs()-ts)/1000);
-    if (s < 60) return 'vor ' + s + 's';
+    if (s < 60) return s + 's ago';
     const m = Math.floor(s/60);
-    if (m < 60) return 'vor ' + m + ' min';
+    if (m < 60) return m + ' min ago';
     const h = Math.floor(m/60);
-    return 'vor ' + h + ' h';
+    return h + 'h ago';
   }
 
   function renderRunnerList(runners){
     if (runners.length === 0){
-      runnerList.innerHTML = '<div class="empty-state">Noch niemand sichtbar.</div>';
+      runnerList.innerHTML = '<div class="empty-state">No one visible yet.</div>';
       return;
     }
     runners.sort((a,b)=> (a.status==='dnf') - (b.status==='dnf') || (b.loops||0) - (a.loops||0));
@@ -658,11 +666,11 @@
       const isOut = r.status === 'dnf';
       return '<div class="runner">' +
         '<div class="info">' +
-          '<div class="name">' + escapeHtml(r.name) + (me && r.id === me.id ? ' (Du)' : '') + '</div>' +
+          '<div class="name">' + escapeHtml(r.name) + (me && r.id === me.id ? ' (You)' : '') + '</div>' +
           '<div class="km">' + km + '</div>' +
         '</div>' +
         '<div class="status' + (isOut ? '' : ' is-active') + '">' + (isOut ? 'Out' : 'In') + '</div>' +
-        '<div class="round">' + (r.loops||0) + '/' + RACE_HOURS + '</div>' +
+        '<div class="round">' + (r.loops||0) + '/' + RACE_HOURS + '<br>' + km + '</div>' +
       '</div>';
     }).join('');
   }
@@ -677,10 +685,10 @@
       const runners = data ? Object.keys(data).map(k=>data[k]) : [];
       renderRunnerList(runners);
       updateMapMarkers(runners);
-      runnerCountTag.textContent = runners.filter(r=>r.status!=='dnf').length + ' aktiv · ' + runners.length + ' gesamt';
+      runnerCountTag.textContent = runners.filter(r=>r.status!=='dnf').length + ' active · ' + runners.length + ' total';
       lastSync.textContent = 'Updated ' + pad(nowSim().getHours()) + ':' + pad(nowSim().getMinutes());
     }catch(e){
-      console.error('Sync fehlgeschlagen', e);
+      console.error('Sync failed', e);
     }
   }
 
@@ -701,11 +709,11 @@
           me.loops = saved.loops || 0;
           if (saved.status === 'dnf'){
             dnf = true;
-            dnfStatus.textContent = 'ausgeschieden';
+            dnfStatus.textContent = 'dropped out';
             dnfBtn.classList.add('active');
           }
         }
-      }catch(e){ console.warn('Konnte bisherigen Fortschritt nicht laden', e); }
+      }catch(e){ console.warn('Could not load previous progress', e); }
       enterApp();
     }
 
@@ -714,7 +722,7 @@
 
   boot();
 
-  // ---------- Temperatur Biel/Bienne (live, ohne API-Key) ----------
+  // ---------- Temperature Biel/Bienne (live, no API key) ----------
   async function fetchTemp(){
     const el = document.getElementById('statTempValue');
     try{
@@ -730,8 +738,8 @@
   setInterval(fetchTemp, 15 * 60 * 1000);
 
   // ---------- Admin ----------
-  // PIN nur ein leichter Zugriffsschutz, kein echtes Login. Zum Ändern
-  // einfach den Wert unten anpassen.
+  // PIN is just a light access barrier, not real login. To change it,
+  // simply adjust the value below.
   const ADMIN_PIN = '2026';
   let adminUnlocked = false;
 
@@ -763,7 +771,7 @@
       adminPanel.classList.remove('app-hidden');
       loadAdminList();
     } else {
-      adminPinError.textContent = 'Falscher PIN.';
+      adminPinError.textContent = 'Wrong PIN.';
     }
   });
 
@@ -771,9 +779,9 @@
     adminPanel.classList.add('app-hidden');
   });
 
-  // ---------- Athleten-Zugang ----------
-  // Eigener Code für Athlet:innen (getrennt vom Admin-PIN). Zum Ändern
-  // einfach den Wert unten anpassen.
+  // ---------- Athlete access ----------
+  // Separate code for athletes (independent of the admin PIN). To change it,
+  // simply adjust the value below.
   const ATHLETE_CODE = '5300';
 
   const athleteGateBtn = document.getElementById('athleteGateBtn');
@@ -795,23 +803,23 @@
       document.getElementById('athleteArea').classList.remove('app-hidden');
       athleteGateBtn.classList.add('app-hidden');
     } else {
-      athletePinError.textContent = 'Falscher Code.';
+      athletePinError.textContent = 'Wrong code.';
     }
   });
 
-  // ---------- Zeit-Simulation ----------
+  // ---------- Time simulation ----------
   const simButtons = document.getElementById('simButtons');
 
   const SIM_PRESETS = [
-    { label: 'Echte Zeit', hours: null },
+    { label: 'Real time', hours: null },
     { label: 'Start (0h)', hours: 0 },
     { label: '+1h', hours: 1 },
     { label: '+6h', hours: 6 },
     { label: '+10h', hours: 10 },
     { label: '+12h', hours: 12 },
     { label: '+18h', hours: 18 },
-    { label: 'Kurz vor Ende', hours: 23.9 },
-    { label: 'Nach Ende', hours: 25 }
+    { label: 'Just before end', hours: 23.9 },
+    { label: 'After end', hours: 25 }
   ];
 
   SIM_PRESETS.forEach(p=>{
@@ -833,19 +841,19 @@
   });
 
   async function loadAdminList(){
-    adminList.innerHTML = '<div class="empty-state">Lädt …</div>';
+    adminList.innerHTML = '<div class="empty-state">Loading …</div>';
     try{
       const data = await fbGet('runners');
       const runners = data ? Object.keys(data).map(k=>data[k]) : [];
       if (runners.length === 0){
-        adminList.innerHTML = '<div class="empty-state">Noch keine Teilnehmer.</div>';
+        adminList.innerHTML = '<div class="empty-state">No participants yet.</div>';
         return;
       }
       runners.sort((a,b)=> a.name.localeCompare(b.name));
       adminList.innerHTML = '';
       runners.forEach(r=> adminList.appendChild(renderAdminRow(r)));
     }catch(e){
-      adminList.innerHTML = '<div class="error-msg">Laden fehlgeschlagen: ' + (e.message || e) + '</div>';
+      adminList.innerHTML = '<div class="error-msg">Loading failed: ' + (e.message || e) + '</div>';
     }
   }
 
@@ -863,7 +871,7 @@
 
     const dnfToggle = document.createElement('button');
     dnfToggle.className = 'admin-icon-btn' + (r.status === 'dnf' ? ' danger active' : '');
-    dnfToggle.textContent = r.status === 'dnf' ? 'DNF' : 'Aktiv';
+    dnfToggle.textContent = r.status === 'dnf' ? 'DNF' : 'Active';
 
     const loopsInputEl = document.createElement('input');
     loopsInputEl.type = 'number';
@@ -886,7 +894,7 @@
 
     const delBtn = document.createElement('button');
     delBtn.className = 'admin-icon-btn danger';
-    delBtn.textContent = 'Löschen';
+    delBtn.textContent = 'Delete';
 
     top.appendChild(nameInputEl);
     top.appendChild(loopsInputEl);
@@ -897,7 +905,7 @@
     const emailInputEl = document.createElement('input');
     emailInputEl.type = 'email';
     emailInputEl.value = r.email || '';
-    emailInputEl.placeholder = 'E-Mail';
+    emailInputEl.placeholder = 'Email';
 
     row.appendChild(top);
     row.appendChild(emailInputEl);
@@ -912,7 +920,7 @@
       });
       try{
         await fbSet('runners/' + r.id, updated);
-      }catch(e){ console.error('Update fehlgeschlagen', e); }
+      }catch(e){ console.error('Update failed', e); }
     }
 
     nameInputEl.addEventListener('change', persist);
@@ -921,15 +929,15 @@
     dnfToggle.addEventListener('click', ()=>{
       dnfToggle.classList.toggle('active');
       dnfToggle.classList.toggle('danger');
-      dnfToggle.textContent = dnfToggle.classList.contains('active') ? 'DNF' : 'Aktiv';
+      dnfToggle.textContent = dnfToggle.classList.contains('active') ? 'DNF' : 'Active';
       persist();
     });
     delBtn.addEventListener('click', async ()=>{
-      if (!confirm(r.name + ' wirklich entfernen?')) return;
+      if (!confirm('Really remove ' + r.name + '?')) return;
       try{
         await fbDelete('runners/' + r.id);
         row.remove();
-      }catch(e){ alert('Löschen fehlgeschlagen: ' + (e.message || e)); }
+      }catch(e){ alert('Delete failed: ' + (e.message || e)); }
     });
 
     return row;
